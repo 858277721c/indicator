@@ -26,10 +26,10 @@ import android.widget.FrameLayout;
 import com.fanwe.lib.indicator.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.IPagerIndicatorTrack;
 import com.fanwe.lib.indicator.PagerIndicatorGroup;
+import com.fanwe.lib.indicator.R;
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.view.TrackHorizontalScrollView;
-import com.fanwe.lib.viewpager.indicator.R;
 import com.fanwe.lib.indicator.utils.SDViewPagerInfoListener;
+import com.fanwe.lib.indicator.view.TrackHorizontalScrollView;
 
 public class PagerIndicator extends FrameLayout
 {
@@ -60,7 +60,7 @@ public class PagerIndicator extends FrameLayout
 
     private void init()
     {
-        LayoutInflater.from(getContext()).inflate(R.layout.lib_vpg_pager_indicator, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_pager_indicator, this, true);
         mHorizontalScrollView = (TrackHorizontalScrollView) findViewById(R.id.view_scroll);
         mPagerIndicatorGroup = (PagerIndicatorGroup) findViewById(R.id.view_indicator_group);
         mPagerIndicatorTrackContainer = (ViewGroup) findViewById(R.id.view_indicator_track_container);
