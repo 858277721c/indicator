@@ -159,6 +159,7 @@ public class SDViewPagerInfoListener
                 mInternalDataSetObserver.unregister();
             }
 
+            // 清空选中位置
             mInternalOnPageChangeListener.resetPosition();
 
             if (viewPager != null)
@@ -169,6 +170,7 @@ public class SDViewPagerInfoListener
                 viewPager.addOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.registerTo(viewPager.getAdapter());
 
+                // 更新选中位置
                 mInternalOnPageChangeListener.setSelected(viewPager.getCurrentItem());
             } else
             {
