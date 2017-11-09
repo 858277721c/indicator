@@ -276,6 +276,7 @@ public class SDViewPagerInfoListener
             {
                 if (currentPositionOffsetSum == mLastPositionOffsetSum)
                 {
+                    // 已经拖动到边界，继续拖动不处理
                     processScrolledPercentLogic = false;
                 }
             }
