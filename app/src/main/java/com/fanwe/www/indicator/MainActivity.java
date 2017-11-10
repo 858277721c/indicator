@@ -72,10 +72,10 @@ public class MainActivity extends AppCompatActivity
         {
             if (isEnter)
             {
-                LogUtil.e("onShowPercent enter:" + position + " " + showPercent + " " + isEnter + " " + isMoveLeft);
+                LogUtil.e("onShowPercent enter:" + position + " " + showPercent + " " + isMoveLeft);
             } else
             {
-                LogUtil.e("onShowPercent leave---------->:" + position + " " + showPercent + " " + isEnter + " " + isMoveLeft);
+                LogUtil.e("onShowPercent leave---------->:" + position + " " + showPercent + " " + isMoveLeft);
             }
         }
     };
