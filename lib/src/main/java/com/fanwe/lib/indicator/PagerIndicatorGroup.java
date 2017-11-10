@@ -132,7 +132,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
                 PagerIndicatorGroup.this.onSelectedChanged(position, selected);
             }
         });
-        mViewPagerInfoListener.setOnPageScrolledPercentChangeCallback(new SDViewPagerInfoListener.OnPageScrolledPercentChangeCallback()
+        mViewPagerInfoListener.setOnPageScrolledPercentCallback(new SDViewPagerInfoListener.OnPageScrolledPercentCallback()
         {
             @Override
             public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)

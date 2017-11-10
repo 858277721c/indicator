@@ -38,7 +38,7 @@ public class SDViewPagerInfoListener
 
     private OnPageCountChangeCallback mOnPageCountChangeCallback;
     private OnPageSelectedChangeCallback mOnPageSelectedChangeCallback;
-    private OnPageScrolledPercentChangeCallback mOnPageScrolledPercentChangeCallback;
+    private OnPageScrolledPercentCallback mOnPageScrolledPercentCallback;
 
     /**
      * 设置数据变化回调
@@ -93,11 +93,11 @@ public class SDViewPagerInfoListener
     /**
      * 设置滚动百分比回调
      *
-     * @param onPageScrolledPercentChangeCallback
+     * @param onPageScrolledPercentCallback
      */
-    public void setOnPageScrolledPercentChangeCallback(OnPageScrolledPercentChangeCallback onPageScrolledPercentChangeCallback)
+    public void setOnPageScrolledPercentCallback(OnPageScrolledPercentCallback onPageScrolledPercentCallback)
     {
-        mOnPageScrolledPercentChangeCallback = onPageScrolledPercentChangeCallback;
+        mOnPageScrolledPercentCallback = onPageScrolledPercentCallback;
     }
 
     /**
@@ -256,9 +256,9 @@ public class SDViewPagerInfoListener
                 return;
             }
 
-            if (mOnPageScrolledPercentChangeCallback != null)
+            if (mOnPageScrolledPercentCallback != null)
             {
-                mOnPageScrolledPercentChangeCallback.onShowPercent(position, percent, isEnter, isMoveLeft);
+                mOnPageScrolledPercentCallback.onShowPercent(position, percent, isEnter, isMoveLeft);
             }
 
             mArrShowPercent.put(position, percent);
@@ -478,7 +478,7 @@ public class SDViewPagerInfoListener
         void onPageCountChanged(int count);
     }
 
-    public interface OnPageScrolledPercentChangeCallback
+    public interface OnPageScrolledPercentCallback
     {
         /**
          * ViewPager页面显示的百分比回调
