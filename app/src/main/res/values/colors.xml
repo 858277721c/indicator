@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!-- 默认指示器正常颜色 -->
+    <color name="lib_indicator_indicator_normal">#777777</color>
+    <!-- 默认指示器选中颜色 -->
+    <color name="lib_indicator_indicator_selected">@color/colorAccent</color>
 </resources>

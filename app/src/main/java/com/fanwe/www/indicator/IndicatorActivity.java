@@ -27,8 +27,6 @@ public class IndicatorActivity extends AppCompatActivity
 
         vpg_content.setAdapter(mPagerAdapter);
         mPagerAdapter.updateData(DataModel.get(10));
-
-        view_indicator.setViewPager(vpg_content);
     }
 
     private SDPagerAdapter<DataModel> mPagerAdapter = new SDPagerAdapter<DataModel>(null, this)

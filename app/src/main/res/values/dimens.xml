@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- 指示器间距 -->
+    <dimen name="lib_indicator_indicator_margin">10dp</dimen>
+
+
+</resources>
