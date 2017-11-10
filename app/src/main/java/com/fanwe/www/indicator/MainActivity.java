@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
         {
-            LogUtil.i("onShowPercent:" + position + " " + showPercent + " " + isEnter + " " + isMoveLeft);
+            LogUtil.e("onShowPercent:" + position + " " + showPercent + " " + isEnter + " " + isMoveLeft);
         }
     };
 
