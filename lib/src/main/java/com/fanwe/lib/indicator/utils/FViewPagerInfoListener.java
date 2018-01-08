@@ -25,7 +25,7 @@ import java.lang.ref.WeakReference;
 /**
  * 监听ViewPager的一些重要数据，比如总页数变化，数据集变化，选中变化，滚动百分比变化等
  */
-public class SDViewPagerInfoListener
+public class FViewPagerInfoListener
 {
     private WeakReference<ViewPager> mViewPager;
     private InternalDataSetObserver mInternalDataSetObserver = new InternalDataSetObserver();

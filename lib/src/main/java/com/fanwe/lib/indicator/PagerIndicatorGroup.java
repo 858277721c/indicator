@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.impl.ImagePagerIndicatorItem;
-import com.fanwe.lib.indicator.utils.SDViewPagerInfoListener;
+import com.fanwe.lib.indicator.utils.FViewPagerInfoListener;
 
 /**
  * ViewPager指示器Group
@@ -56,7 +56,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     private PagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrack mPagerIndicatorTrack;
 
-    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
+    private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
 
     /**
      * 当DataSetObserver变化的时候是否全部重新创建view
@@ -108,7 +108,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
                 onDataSetChangedInternal();
             }
         });
-        mViewPagerInfoListener.setOnPageCountChangeCallback(new SDViewPagerInfoListener.OnPageCountChangeCallback()
+        mViewPagerInfoListener.setOnPageCountChangeCallback(new FViewPagerInfoListener.OnPageCountChangeCallback()
         {
             @Override
             public void onPageCountChanged(int count)
@@ -120,7 +120,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
                 PagerIndicatorGroup.this.onPageCountChanged(count);
             }
         });
-        mViewPagerInfoListener.setOnPageSelectedChangeCallback(new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
+        mViewPagerInfoListener.setOnPageSelectedChangeCallback(new FViewPagerInfoListener.OnPageSelectedChangeCallback()
         {
             @Override
             public void onSelectedChanged(int position, boolean selected)
@@ -132,7 +132,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
                 PagerIndicatorGroup.this.onSelectedChanged(position, selected);
             }
         });
-        mViewPagerInfoListener.setOnPageScrolledPercentCallback(new SDViewPagerInfoListener.OnPageScrolledPercentCallback()
+        mViewPagerInfoListener.setOnPageScrolledPercentCallback(new FViewPagerInfoListener.OnPageScrolledPercentCallback()
         {
             @Override
             public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)

@@ -28,7 +28,7 @@ import com.fanwe.lib.indicator.IPagerIndicatorTrack;
 import com.fanwe.lib.indicator.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.R;
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.utils.SDViewPagerInfoListener;
+import com.fanwe.lib.indicator.utils.FViewPagerInfoListener;
 import com.fanwe.lib.indicator.view.TrackHorizontalScrollView;
 
 public class PagerIndicator extends FrameLayout
@@ -56,7 +56,7 @@ public class PagerIndicator extends FrameLayout
     private PagerIndicatorGroup mPagerIndicatorGroup;
     private ViewGroup mPagerIndicatorTrackContainer;
 
-    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
+    private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
 
     private void init()
     {
@@ -153,7 +153,7 @@ public class PagerIndicator extends FrameLayout
         }
     }
 
-    private SDViewPagerInfoListener.OnPageSelectedChangeCallback mInternalOnPageSelectedChangeCallback = new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
+    private FViewPagerInfoListener.OnPageSelectedChangeCallback mInternalOnPageSelectedChangeCallback = new FViewPagerInfoListener.OnPageSelectedChangeCallback()
     {
         @Override
         public void onSelectedChanged(int position, boolean selected)

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fanwe.lib.indicator.utils.SDViewPagerInfoListener;
+import com.fanwe.lib.indicator.utils.FViewPagerInfoListener;
 import com.fanwe.library.adapter.SDPagerAdapter;
 import com.fanwe.library.utils.LogUtil;
 
@@ -16,7 +16,7 @@ public class ViewPagerInfoActivity extends AppCompatActivity
 {
     private ViewPager vpg_content;
 
-    private SDViewPagerInfoListener mViewPagerInfoListener = new SDViewPagerInfoListener();
+    private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,7 +62,7 @@ public class ViewPagerInfoActivity extends AppCompatActivity
         mViewPagerInfoListener.setViewPager(vpg_content); //设置要监听的ViewPager
     }
 
-    private SDViewPagerInfoListener.OnPageScrolledPercentCallback mOnPageScrolledPercentCallback = new SDViewPagerInfoListener.OnPageScrolledPercentCallback()
+    private FViewPagerInfoListener.OnPageScrolledPercentCallback mOnPageScrolledPercentCallback = new FViewPagerInfoListener.OnPageScrolledPercentCallback()
     {
         @Override
         public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
@@ -87,7 +87,7 @@ public class ViewPagerInfoActivity extends AppCompatActivity
         }
     };
 
-    private SDViewPagerInfoListener.OnPageCountChangeCallback mOnPageCountChangeCallback = new SDViewPagerInfoListener.OnPageCountChangeCallback()
+    private FViewPagerInfoListener.OnPageCountChangeCallback mOnPageCountChangeCallback = new FViewPagerInfoListener.OnPageCountChangeCallback()
     {
         @Override
         public void onPageCountChanged(int count)
@@ -96,7 +96,7 @@ public class ViewPagerInfoActivity extends AppCompatActivity
         }
     };
 
-    private SDViewPagerInfoListener.OnPageSelectedChangeCallback mOnPageSelectedChangeCallback = new SDViewPagerInfoListener.OnPageSelectedChangeCallback()
+    private FViewPagerInfoListener.OnPageSelectedChangeCallback mOnPageSelectedChangeCallback = new FViewPagerInfoListener.OnPageSelectedChangeCallback()
     {
         @Override
         public void onSelectedChanged(int position, boolean selected)
