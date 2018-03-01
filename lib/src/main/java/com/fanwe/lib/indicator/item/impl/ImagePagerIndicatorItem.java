@@ -17,12 +17,14 @@ package com.fanwe.lib.indicator.item.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.R;
+import com.fanwe.lib.indicator.common.model.PositionData;
+import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 
-public class ImagePagerIndicatorItem extends PagerIndicatorItem
+public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
 {
     public ImagePagerIndicatorItem(Context context)
     {
@@ -75,7 +77,7 @@ public class ImagePagerIndicatorItem extends PagerIndicatorItem
     @Override
     public void onSelectedChanged(boolean selected)
     {
-        LayoutParams params = (LayoutParams) getImageView().getLayoutParams();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getImageView().getLayoutParams();
         if (selected)
         {
             params.width = getIndicatorConfig().widthSelected;
@@ -95,6 +97,35 @@ public class ImagePagerIndicatorItem extends PagerIndicatorItem
         params.rightMargin = margin;
 
         getImageView().setLayoutParams(params);
+    }
+
+    @Override
+    public void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft)
+    {
+
+    }
+
+    private PositionData mPositionData;
+
+    @Override
+    public PositionData getPositionData()
+    {
+        if (mPositionData == null)
+        {
+            mPositionData = new PositionData();
+        }
+        return mPositionData;
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom)
+    {
+        super.onLayout(changed, left, top, right, bottom);
+
+        getPositionData().left = getLeft();
+        getPositionData().top = getTop();
+        getPositionData().right = getRight();
+        getPositionData().bottom = getBottom();
     }
 
     public static class IndicatorConfig
