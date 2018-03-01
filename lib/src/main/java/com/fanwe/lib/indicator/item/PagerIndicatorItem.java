@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator;
+package com.fanwe.lib.indicator.item;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.fanwe.lib.indicator.model.PositionData;
+import com.fanwe.lib.indicator.common.model.PositionData;
 
 /**
  * Created by zhengjun on 2018/3/1.

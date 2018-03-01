@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fanwe.lib.indicator.utils.FViewPagerInfoListener;
+import com.fanwe.lib.indicator.common.utils.FViewPagerInfoListener;
 import com.fanwe.library.adapter.SDPagerAdapter;
 import com.fanwe.library.utils.LogUtil;
 

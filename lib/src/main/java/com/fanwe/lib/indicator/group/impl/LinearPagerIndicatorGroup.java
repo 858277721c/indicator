@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator.impl;
+package com.fanwe.lib.indicator.group.impl;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -22,9 +22,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.lib.indicator.IPagerIndicatorItem;
-import com.fanwe.lib.indicator.PagerIndicatorGroup;
-import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
+import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
 
 /**
  * 线性的ViewPager指示器Group

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator.impl;
+package com.fanwe.lib.indicator.track.impl;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -23,8 +23,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.fanwe.lib.indicator.IPagerIndicatorTrack;
-import com.fanwe.lib.indicator.model.PositionData;
+import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.indicator.common.model.PositionData;
 
 /**
  * 线形的Item追踪view（开发中，未完成）

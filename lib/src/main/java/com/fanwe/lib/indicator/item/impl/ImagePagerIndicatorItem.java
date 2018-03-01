@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator.impl;
+package com.fanwe.lib.indicator.item.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.fanwe.lib.indicator.PagerIndicatorItem;
+import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.R;
 
 public class ImagePagerIndicatorItem extends PagerIndicatorItem

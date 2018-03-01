@@ -1,4 +1,4 @@
-package com.fanwe.lib.indicator.utils;
+package com.fanwe.lib.indicator.common.utils;
 
 /**
  * 从android源码中拷贝的

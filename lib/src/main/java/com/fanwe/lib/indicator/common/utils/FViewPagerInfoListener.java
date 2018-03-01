@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator.utils;
+package com.fanwe.lib.indicator.common.utils;
 
 import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;

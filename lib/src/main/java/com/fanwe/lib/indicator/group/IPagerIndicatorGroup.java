@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator;
+package com.fanwe.lib.indicator.group;
 
 import android.support.v4.view.ViewPager;
 
-import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
 
 /**
  * ViewPager指示器Group

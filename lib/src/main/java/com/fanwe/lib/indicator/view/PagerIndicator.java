@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator.impl;
+package com.fanwe.lib.indicator.view;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -23,13 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.fanwe.lib.indicator.IPagerIndicatorItem;
-import com.fanwe.lib.indicator.IPagerIndicatorTrack;
-import com.fanwe.lib.indicator.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.R;
-import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.utils.FViewPagerInfoListener;
-import com.fanwe.lib.indicator.view.TrackHorizontalScrollView;
+import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.common.utils.FViewPagerInfoListener;
+import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
+import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
 
 public class PagerIndicator extends FrameLayout
 {
@@ -61,9 +60,9 @@ public class PagerIndicator extends FrameLayout
     private void init()
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_pager_indicator, this, true);
-        mHorizontalScrollView = (TrackHorizontalScrollView) findViewById(R.id.view_scroll);
-        mPagerIndicatorGroup = (PagerIndicatorGroup) findViewById(R.id.view_indicator_group);
-        mPagerIndicatorTrackContainer = (ViewGroup) findViewById(R.id.view_indicator_track_container);
+        mHorizontalScrollView = findViewById(R.id.view_scroll);
+        mPagerIndicatorGroup = findViewById(R.id.view_indicator_group);
+        mPagerIndicatorTrackContainer = findViewById(R.id.view_indicator_track_container);
 
         mViewPagerInfoListener.setOnPageSelectedChangeCallback(mInternalOnPageSelectedChangeCallback);
     }

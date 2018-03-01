@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator;
+package com.fanwe.lib.indicator.group;
 
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.impl.ImagePagerIndicatorItem;
-import com.fanwe.lib.indicator.utils.FViewPagerInfoListener;
+import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.common.utils.FViewPagerInfoListener;
+import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
+import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
 
 /**
  * ViewPager指示器Group
@@ -63,17 +64,10 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
      */
     private boolean mIsFullCreateMode = true;
 
-    private boolean mIsDebug;
-
     private void init()
     {
         setAdapter(mInternalPagerIndicatorAdapter);
         initViewPagerInfoListener();
-    }
-
-    public void setDebug(boolean debug)
-    {
-        mIsDebug = debug;
     }
 
     protected int getPageCount()
@@ -113,10 +107,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
             @Override
             public void onPageCountChanged(int count)
             {
-                if (mIsDebug)
-                {
-                    Log.i(TAG, "onPageCountChanged:" + count);
-                }
                 PagerIndicatorGroup.this.onPageCountChanged(count);
             }
         });
@@ -125,10 +115,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
             @Override
             public void onSelectedChanged(int position, boolean selected)
             {
-                if (mIsDebug)
-                {
-                    Log.i(TAG, "onSelectedChanged:" + position + "," + selected);
-                }
                 PagerIndicatorGroup.this.onSelectedChanged(position, selected);
             }
         });
@@ -137,16 +123,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
             @Override
             public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
             {
-                if (mIsDebug)
-                {
-                    if (isEnter)
-                    {
-                        Log.i(TAG, "Enter  " + position + "  " + showPercent + "  " + isMoveLeft);
-                    } else
-                    {
-                        Log.e(TAG, "Leave  " + position + "  " + showPercent + "  " + isMoveLeft);
-                    }
-                }
                 PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
             }
         });
@@ -196,11 +172,13 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         return mIsFullCreateMode;
     }
 
+    @Override
     public void setPagerIndicatorTrack(IPagerIndicatorTrack pagerIndicatorTrack)
     {
         mPagerIndicatorTrack = pagerIndicatorTrack;
     }
 
+    @Override
     public IPagerIndicatorTrack getPagerIndicatorTrack()
     {
         return mPagerIndicatorTrack;

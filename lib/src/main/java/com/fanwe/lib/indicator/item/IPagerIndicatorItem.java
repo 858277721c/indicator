@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator;
+package com.fanwe.lib.indicator.item;
 
-import com.fanwe.lib.indicator.model.PositionData;
+import com.fanwe.lib.indicator.common.model.PositionData;
 
 /**
  * ViewPager指示器Item

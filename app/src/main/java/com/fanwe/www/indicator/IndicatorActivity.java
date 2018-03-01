@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fanwe.lib.indicator.impl.PagerIndicator;
+import com.fanwe.lib.indicator.view.PagerIndicator;
 import com.fanwe.library.adapter.SDPagerAdapter;
 
 public class IndicatorActivity extends AppCompatActivity
