@@ -94,10 +94,9 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
         {
             return;
         }
-        final int childCount = getChildCount();
         for (int i = 0; i < count; i++)
         {
-            View view = adapter.createPagerIndicatorItem(childCount + i, this);
+            View view = adapter.createPagerIndicatorItem(i, this);
 
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if (params == null)
