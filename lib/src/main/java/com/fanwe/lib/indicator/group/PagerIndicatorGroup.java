@@ -52,13 +52,10 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         init();
     }
 
-    private static final String TAG = "PagerIndicatorGroup";
-
     private PagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrack mPagerIndicatorTrack;
 
     private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
-
     /**
      * 当DataSetObserver变化的时候是否全部重新创建view
      */
