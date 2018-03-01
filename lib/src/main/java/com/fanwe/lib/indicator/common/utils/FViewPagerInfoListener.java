@@ -148,14 +148,14 @@ public class FViewPagerInfoListener
      */
     public void setViewPager(ViewPager viewPager)
     {
-        final ViewPager oldView = getViewPager();
-        if (oldView != viewPager)
+        final ViewPager old = getViewPager();
+        if (old != viewPager)
         {
-            if (oldView != null)
+            if (old != null)
             {
                 //如果旧的对象不为空先取消监听
-                oldView.removeOnPageChangeListener(mInternalOnPageChangeListener);
-                oldView.removeOnAdapterChangeListener(mInternalOnAdapterChangeListener);
+                old.removeOnPageChangeListener(mInternalOnPageChangeListener);
+                old.removeOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.unregister();
             }
 
@@ -404,13 +404,13 @@ public class FViewPagerInfoListener
          */
         public void registerTo(PagerAdapter adapter)
         {
-            final PagerAdapter oldAdapter = getAdapter();
-            if (oldAdapter != adapter)
+            final PagerAdapter old = getAdapter();
+            if (old != adapter)
             {
-                if (oldAdapter != null)
+                if (old != null)
                 {
                     // 如果旧对象存在先取消注册
-                    oldAdapter.unregisterDataSetObserver(this);
+                    old.unregisterDataSetObserver(this);
                 }
 
                 if (adapter != null)
@@ -436,10 +436,10 @@ public class FViewPagerInfoListener
          */
         public void unregister()
         {
-            final PagerAdapter oldAdapter = getAdapter();
-            if (oldAdapter != null)
+            final PagerAdapter old = getAdapter();
+            if (old != null)
             {
-                oldAdapter.unregisterDataSetObserver(this);
+                old.unregisterDataSetObserver(this);
                 mAdapter = null;
             }
         }
