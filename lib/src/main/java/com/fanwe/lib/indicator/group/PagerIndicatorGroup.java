@@ -55,82 +55,89 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     private PagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrack mPagerIndicatorTrack;
 
-    private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
+    private FViewPagerInfoListener mViewPagerInfoListener;
 
     private void init()
     {
-        setAdapter(mInternalPagerIndicatorAdapter);
-        initViewPagerInfoListener();
+        //设置一个默认的Adapter
+        setAdapter(new PagerIndicatorAdapter()
+        {
+            @Override
+            public IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent)
+            {
+                return new ImagePagerIndicatorItem(getContext());
+            }
+        });
     }
 
-    protected int getPageCount()
+    private FViewPagerInfoListener getViewPagerInfoListener()
     {
-        return mViewPagerInfoListener.getPageCount();
-    }
+        if (mViewPagerInfoListener == null)
+        {
+            mViewPagerInfoListener = new FViewPagerInfoListener();
+            mViewPagerInfoListener.setDataSetObserver(new DataSetObserver()
+            {
+                @Override
+                public void onChanged()
+                {
+                    super.onChanged();
+                    //ViewPager的Adapter数据集变化通知
+                    onDataSetChangedInternal();
+                }
 
-    private void initViewPagerInfoListener()
-    {
-        mViewPagerInfoListener.setDataSetObserver(new DataSetObserver()
-        {
-            @Override
-            public void onChanged()
+                @Override
+                public void onInvalidated()
+                {
+                    super.onInvalidated();
+                }
+            });
+            mViewPagerInfoListener.setOnAdapterChangeListener(new ViewPager.OnAdapterChangeListener()
             {
-                super.onChanged();
-                //ViewPager的Adapter数据集变化通知
-                onDataSetChangedInternal();
-            }
-
-            @Override
-            public void onInvalidated()
+                @Override
+                public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
+                {
+                    // Adapter变化通知
+                    onDataSetChangedInternal();
+                }
+            });
+            mViewPagerInfoListener.setOnPageCountChangeCallback(new FViewPagerInfoListener.OnPageCountChangeCallback()
             {
-                super.onInvalidated();
-            }
-        });
-        mViewPagerInfoListener.setOnAdapterChangeListener(new ViewPager.OnAdapterChangeListener()
-        {
-            @Override
-            public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
+                @Override
+                public void onPageCountChanged(int count)
+                {
+                    PagerIndicatorGroup.this.onPageCountChanged(count);
+                }
+            });
+            mViewPagerInfoListener.setOnPageSelectedChangeCallback(new FViewPagerInfoListener.OnPageSelectedChangeCallback()
             {
-                // Adapter变化通知
-                onDataSetChangedInternal();
-            }
-        });
-        mViewPagerInfoListener.setOnPageCountChangeCallback(new FViewPagerInfoListener.OnPageCountChangeCallback()
-        {
-            @Override
-            public void onPageCountChanged(int count)
+                @Override
+                public void onSelectedChanged(int position, boolean selected)
+                {
+                    PagerIndicatorGroup.this.onSelectedChanged(position, selected);
+                }
+            });
+            mViewPagerInfoListener.setOnPageScrolledPercentCallback(new FViewPagerInfoListener.OnPageScrolledPercentCallback()
             {
-                PagerIndicatorGroup.this.onPageCountChanged(count);
-            }
-        });
-        mViewPagerInfoListener.setOnPageSelectedChangeCallback(new FViewPagerInfoListener.OnPageSelectedChangeCallback()
-        {
-            @Override
-            public void onSelectedChanged(int position, boolean selected)
-            {
-                PagerIndicatorGroup.this.onSelectedChanged(position, selected);
-            }
-        });
-        mViewPagerInfoListener.setOnPageScrolledPercentCallback(new FViewPagerInfoListener.OnPageScrolledPercentCallback()
-        {
-            @Override
-            public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
-            {
-                PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
-            }
-        });
+                @Override
+                public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
+                {
+                    PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
+                }
+            });
+        }
+        return mViewPagerInfoListener;
     }
 
     @Override
     public void setViewPager(ViewPager viewPager)
     {
-        mViewPagerInfoListener.setViewPager(viewPager);
+        getViewPagerInfoListener().setViewPager(viewPager);
     }
 
     @Override
     public ViewPager getViewPager()
     {
-        return mViewPagerInfoListener.getViewPager();
+        return getViewPagerInfoListener().getViewPager();
     }
 
     @Override
@@ -164,15 +171,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     {
         return mPagerIndicatorTrack;
     }
-
-    private PagerIndicatorAdapter mInternalPagerIndicatorAdapter = new PagerIndicatorAdapter()
-    {
-        @Override
-        public IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent)
-        {
-            return new ImagePagerIndicatorItem(getContext());
-        }
-    };
 
     @Override
     public void onPageCountChanged(int count)
@@ -232,10 +230,11 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
 
     private void onDataSetChangedInternal()
     {
-        onDataSetChanged();
-        mViewPagerInfoListener.notifySelected();
+        int count = getViewPagerInfoListener().getPageCount();
+        onDataSetChanged(count);
+        getViewPagerInfoListener().notifySelected();
     }
 
-    protected abstract void onDataSetChanged();
+    protected abstract void onDataSetChanged(int count);
 
 }
