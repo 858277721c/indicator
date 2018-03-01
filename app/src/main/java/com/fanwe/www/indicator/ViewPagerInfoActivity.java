@@ -15,7 +15,6 @@ import com.fanwe.library.utils.LogUtil;
 public class ViewPagerInfoActivity extends AppCompatActivity
 {
     private ViewPager vpg_content;
-
     private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
 
     @Override
@@ -23,7 +22,7 @@ public class ViewPagerInfoActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager_info);
-        vpg_content = (ViewPager) findViewById(R.id.vpg_content);
+        vpg_content = findViewById(R.id.vpg_content);
 
         initListener();
 
@@ -38,7 +37,7 @@ public class ViewPagerInfoActivity extends AppCompatActivity
         {
             View view = getLayoutInflater().inflate(R.layout.item_vpg, viewGroup, false);
 
-            TextView textView = (TextView) view.findViewById(R.id.btn);
+            TextView textView = view.findViewById(R.id.btn);
             textView.setText(getData(position).name);
             textView.setOnClickListener(new View.OnClickListener()
             {

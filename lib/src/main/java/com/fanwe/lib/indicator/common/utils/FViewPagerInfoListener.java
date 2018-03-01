@@ -107,13 +107,7 @@ public class FViewPagerInfoListener
      */
     public ViewPager getViewPager()
     {
-        if (mViewPager != null)
-        {
-            return mViewPager.get();
-        } else
-        {
-            return null;
-        }
+        return mViewPager == null ? null : mViewPager.get();
     }
 
     /**
@@ -123,20 +117,30 @@ public class FViewPagerInfoListener
      */
     public int getPageCount()
     {
-        return mPageCount;
+        int count = 0;
+        final ViewPager viewPager = getViewPager();
+        if (viewPager != null)
+        {
+            PagerAdapter adapter = viewPager.getAdapter();
+            if (adapter != null)
+            {
+                count = adapter.getCount();
+            }
+        }
+        return count;
     }
 
-    private void setPageCount(int pageCount)
+    private void notifyPageCountChangeIfNeed()
     {
-        if (mPageCount != pageCount)
+        final int count = getPageCount();
+        final int old = mPageCount;
+        if (old != count)
         {
-            mPageCount = pageCount;
-
+            mPageCount = count;
             initShowPercent();
-
             if (mOnPageCountChangeCallback != null)
             {
-                mOnPageCountChangeCallback.onPageCountChanged(pageCount);
+                mOnPageCountChangeCallback.onPageCountChanged(count);
             }
         }
     }
@@ -153,30 +157,25 @@ public class FViewPagerInfoListener
         {
             if (old != null)
             {
-                //如果旧的对象不为空先取消监听
                 old.removeOnPageChangeListener(mInternalOnPageChangeListener);
                 old.removeOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.unregister();
             }
 
-            // 清空选中位置
-            mInternalOnPageChangeListener.resetPosition();
+            //清空选中位置
+            mInternalOnPageChangeListener.resetSelected();
+
+            mViewPager = (viewPager == null ? null : new WeakReference<>(viewPager));
+            notifyPageCountChangeIfNeed();
 
             if (viewPager != null)
             {
-                mViewPager = new WeakReference<>(viewPager);
-
                 viewPager.addOnPageChangeListener(mInternalOnPageChangeListener);
                 viewPager.addOnAdapterChangeListener(mInternalOnAdapterChangeListener);
                 mInternalDataSetObserver.registerTo(viewPager.getAdapter());
 
                 // 更新选中位置
                 mInternalOnPageChangeListener.setSelected(viewPager.getCurrentItem());
-            } else
-            {
-                mViewPager = null;
-
-                setPageCount(0);
             }
         }
     }
@@ -214,13 +213,13 @@ public class FViewPagerInfoListener
         private int mScrollState = ViewPager.SCROLL_STATE_IDLE;
         private float mLastPositionOffsetSum = -1;
 
-        private int mCurrentPosition = -1;
-        private int mLastPosition = -1;
+        private int mCurrentSelected = -1;
+        private int mLastSelected = -1;
 
-        private void resetPosition()
+        private void resetSelected()
         {
-            mCurrentPosition = -1;
-            mLastPosition = -1;
+            mCurrentSelected = -1;
+            mLastSelected = -1;
         }
 
         private void setSelected(int position)
@@ -230,11 +229,11 @@ public class FViewPagerInfoListener
                 return;
             }
 
-            mLastPosition = mCurrentPosition;
-            mCurrentPosition = position;
+            mLastSelected = mCurrentSelected;
+            mCurrentSelected = position;
 
-            notifySelectedChanged(mLastPosition, false);
-            notifySelectedChanged(mCurrentPosition, true);
+            notifySelectedChanged(mLastSelected, false);
+            notifySelectedChanged(mCurrentSelected, true);
         }
 
         private void notifySelectedChanged(int position, boolean selected)
@@ -372,6 +371,7 @@ public class FViewPagerInfoListener
         public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
         {
             mInternalDataSetObserver.registerTo(newAdapter);
+            notifyPageCountChangeIfNeed();
 
             if (mOnAdapterChangeListener != null)
             {
@@ -409,25 +409,15 @@ public class FViewPagerInfoListener
             {
                 if (old != null)
                 {
-                    // 如果旧对象存在先取消注册
                     old.unregisterDataSetObserver(this);
                 }
 
+                mAdapter = (adapter == null ? null : new WeakReference<>(adapter));
+
                 if (adapter != null)
                 {
-                    mAdapter = new WeakReference<>(adapter);
-
                     adapter.registerDataSetObserver(this);
-                    setPageCount(adapter.getCount());
-                } else
-                {
-                    mAdapter = null;
                 }
-            }
-
-            if (adapter == null)
-            {
-                setPageCount(0);
             }
         }
 
@@ -448,7 +438,7 @@ public class FViewPagerInfoListener
         public void onChanged()
         {
             super.onChanged();
-            setPageCount(getAdapter().getCount());
+            notifyPageCountChangeIfNeed();
 
             if (mDataSetObserver != null)
             {
