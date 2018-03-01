@@ -17,9 +17,9 @@ package com.fanwe.lib.indicator.group;
 
 import android.support.v4.view.ViewPager;
 
+import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
-import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
 
 /**
  * ViewPager指示器Group
@@ -53,20 +53,6 @@ public interface IPagerIndicatorGroup
      * @return
      */
     PagerIndicatorAdapter getAdapter();
-
-    /**
-     * 设置当DataSetObserver数据变化的时候是否全部重新创建Item，默认true
-     *
-     * @param fullCreateMode
-     */
-    void setFullCreateMode(boolean fullCreateMode);
-
-    /**
-     * 是否DataSetObserver变化的时候是否全部重新创建Item
-     *
-     * @return
-     */
-    boolean isFullCreateMode();
 
     /**
      * 设置追踪指示器Item的view

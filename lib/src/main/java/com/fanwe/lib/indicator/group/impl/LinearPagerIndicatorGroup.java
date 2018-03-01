@@ -22,9 +22,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
-import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
+import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 
 /**
  * 线性的ViewPager指示器Group
@@ -72,32 +72,10 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
     }
 
     @Override
-    public void onPageCountChanged(int count)
-    {
-        if (!isFullCreateMode())
-        {
-            final int childCount = getChildCount();
-            if (count > childCount)
-            {
-                final int createCount = count - childCount;
-                onAddPagerIndicatorItem(createCount);
-            } else if (count < childCount)
-            {
-                final int removeCount = childCount - count;
-                onRemovePagerIndicatorItem(removeCount);
-            }
-        }
-        super.onPageCountChanged(count);
-    }
-
-    @Override
     protected void onDataSetChanged()
     {
-        if (isFullCreateMode())
-        {
-            removeAllViews();
-            onAddPagerIndicatorItem(getPageCount());
-        }
+        removeAllViews();
+        onAddPagerIndicatorItem(getPageCount());
     }
 
     /**
@@ -145,34 +123,6 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
             }
 
             addView(view, params);
-        }
-    }
-
-    /**
-     * 移除Item
-     *
-     * @param count 要移除的数量
-     */
-    protected void onRemovePagerIndicatorItem(int count)
-    {
-        if (count <= 0)
-        {
-            return;
-        }
-        final int childCount = getChildCount();
-        if (childCount <= 0)
-        {
-            return;
-        }
-        if (count > childCount)
-        {
-            count = childCount;
-        }
-        final int leftCount = childCount - count;
-        //倒序移除
-        for (int i = childCount - 1; i >= leftCount; i--)
-        {
-            removeViewAt(i);
         }
     }
 }

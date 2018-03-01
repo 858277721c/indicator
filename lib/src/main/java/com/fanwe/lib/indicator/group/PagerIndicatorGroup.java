@@ -56,10 +56,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     private IPagerIndicatorTrack mPagerIndicatorTrack;
 
     private FViewPagerInfoListener mViewPagerInfoListener = new FViewPagerInfoListener();
-    /**
-     * 当DataSetObserver变化的时候是否全部重新创建view
-     */
-    private boolean mIsFullCreateMode = true;
 
     private void init()
     {
@@ -155,18 +151,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     public PagerIndicatorAdapter getAdapter()
     {
         return mAdapter;
-    }
-
-    @Override
-    public void setFullCreateMode(boolean fullCreateMode)
-    {
-        mIsFullCreateMode = fullCreateMode;
-    }
-
-    @Override
-    public boolean isFullCreateMode()
-    {
-        return mIsFullCreateMode;
     }
 
     @Override
