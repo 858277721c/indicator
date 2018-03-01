@@ -17,14 +17,12 @@ package com.fanwe.lib.indicator.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.fanwe.lib.indicator.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.PagerIndicatorItem;
 import com.fanwe.lib.indicator.R;
-import com.fanwe.lib.indicator.model.PositionData;
 
-public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
+public class ImagePagerIndicatorItem extends PagerIndicatorItem
 {
     public ImagePagerIndicatorItem(Context context)
     {
@@ -46,8 +44,6 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
 
     private ImageView mImageView;
     private IndicatorConfig mIndicatorConfig;
-
-    private PositionData mPositionData;
 
     private void init()
     {
@@ -99,33 +95,6 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
         params.rightMargin = margin;
 
         getImageView().setLayoutParams(params);
-    }
-
-    @Override
-    public void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft)
-    {
-
-    }
-
-    @Override
-    public PositionData getPositionData()
-    {
-        if (mPositionData == null)
-        {
-            mPositionData = new PositionData();
-        }
-        return mPositionData;
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom)
-    {
-        super.onLayout(changed, left, top, right, bottom);
-
-        getPositionData().left = getLeft();
-        getPositionData().top = getTop();
-        getPositionData().right = getRight();
-        getPositionData().bottom = getBottom();
     }
 
     public static class IndicatorConfig
