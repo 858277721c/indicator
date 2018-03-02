@@ -17,17 +17,18 @@ package com.fanwe.lib.indicator.group;
 
 import android.content.Context;
 import android.database.DataSetObserver;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.common.utils.FViewPagerInfoListener;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.viewpager.helper.FPagerPercentChangeListener;
+import com.fanwe.lib.viewpager.helper.FPagerSelectChangeListener;
+import com.fanwe.lib.viewpager.helper.FViewPagerHolder;
 
 /**
  * ViewPager指示器Group
@@ -55,8 +56,6 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     private PagerIndicatorAdapter mAdapter;
     private IPagerIndicatorTrack mPagerIndicatorTrack;
 
-    private FViewPagerInfoListener mViewPagerInfoListener;
-
     private void init()
     {
         //设置一个默认的Adapter
@@ -70,74 +69,63 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         });
     }
 
-    private FViewPagerInfoListener getViewPagerInfoListener()
+    private FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
     {
-        if (mViewPagerInfoListener == null)
+        @Override
+        protected void onInit(ViewPager viewPager)
         {
-            mViewPagerInfoListener = new FViewPagerInfoListener();
-            mViewPagerInfoListener.setDataSetObserver(new DataSetObserver()
-            {
-                @Override
-                public void onChanged()
-                {
-                    super.onChanged();
-                    //ViewPager的Adapter数据集变化通知
-                    onDataSetChangedInternal();
-                }
-
-                @Override
-                public void onInvalidated()
-                {
-                    super.onInvalidated();
-                }
-            });
-            mViewPagerInfoListener.setOnAdapterChangeListener(new ViewPager.OnAdapterChangeListener()
-            {
-                @Override
-                public void onAdapterChanged(ViewPager viewPager, PagerAdapter oldAdapter, PagerAdapter newAdapter)
-                {
-                    // Adapter变化通知
-                    onDataSetChangedInternal();
-                }
-            });
-            mViewPagerInfoListener.setOnPageCountChangeCallback(new FViewPagerInfoListener.OnPageCountChangeCallback()
-            {
-                @Override
-                public void onPageCountChanged(int count)
-                {
-                    PagerIndicatorGroup.this.onPageCountChanged(count);
-                }
-            });
-            mViewPagerInfoListener.setOnPageSelectedChangeCallback(new FViewPagerInfoListener.OnPageSelectedChangeCallback()
-            {
-                @Override
-                public void onSelectedChanged(int position, boolean selected)
-                {
-                    PagerIndicatorGroup.this.onSelectedChanged(position, selected);
-                }
-            });
-            mViewPagerInfoListener.setOnPageScrolledPercentCallback(new FViewPagerInfoListener.OnPageScrolledPercentCallback()
-            {
-                @Override
-                public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
-                {
-                    PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
-                }
-            });
+            mPagerSelectChangeListener.setViewPager(viewPager);
+            mPagerPercentChangeListener.setViewPager(viewPager);
         }
-        return mViewPagerInfoListener;
-    }
+
+        @Override
+        protected void onRelease(ViewPager viewPager)
+        {
+            mPagerSelectChangeListener.setViewPager(viewPager);
+            mPagerPercentChangeListener.setViewPager(viewPager);
+        }
+    };
+
+    /**
+     * 页面数量变化和选中监听
+     */
+    private FPagerSelectChangeListener mPagerSelectChangeListener = new FPagerSelectChangeListener()
+    {
+        @Override
+        protected void onPageCountChanged(int count)
+        {
+            PagerIndicatorGroup.this.onPageCountChanged(count);
+        }
+
+        @Override
+        protected void onSelectChanged(int index, boolean selected)
+        {
+            PagerIndicatorGroup.this.onSelectChanged(index, selected);
+        }
+    };
+
+    /**
+     * 滚动百分比监听
+     */
+    private FPagerPercentChangeListener mPagerPercentChangeListener = new FPagerPercentChangeListener()
+    {
+        @Override
+        public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
+        {
+            PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
+        }
+    };
 
     @Override
     public void setViewPager(ViewPager viewPager)
     {
-        getViewPagerInfoListener().setViewPager(viewPager);
+        mViewPagerHolder.setViewPager(viewPager);
     }
 
     @Override
     public ViewPager getViewPager()
     {
-        return getViewPagerInfoListener().getViewPager();
+        return mViewPagerHolder.getViewPager();
     }
 
     @Override
@@ -145,12 +133,12 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     {
         if (mAdapter != null)
         {
-            mAdapter.unregisterDataSetObserver(mInternalIndicatorAdapterDataSetObserver);
+            mAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
         }
         mAdapter = adapter;
         if (adapter != null)
         {
-            adapter.registerDataSetObserver(mInternalIndicatorAdapterDataSetObserver);
+            adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
         }
     }
 
@@ -197,7 +185,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     }
 
     @Override
-    public void onSelectedChanged(int position, boolean selected)
+    public void onSelectChanged(int position, boolean selected)
     {
         IPagerIndicatorItem item = getPagerIndicatorItem(position);
         if (item != null)
@@ -206,19 +194,20 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
 
             if (getPagerIndicatorTrack() != null)
             {
-                getPagerIndicatorTrack().onSelectedChanged(position, selected, item.getPositionData());
+                getPagerIndicatorTrack().onSelectChanged(position, selected, item.getPositionData());
             }
         }
     }
 
-    private DataSetObserver mInternalIndicatorAdapterDataSetObserver = new DataSetObserver()
+    private DataSetObserver mIndicatorAdapterDataSetObserver = new DataSetObserver()
     {
         @Override
         public void onChanged()
         {
             super.onChanged();
-            //指示器的Adapter数据集变化通知
-            onDataSetChangedInternal();
+
+            int count = mViewPagerHolder.getAdapterCount();
+            onPageCountChanged(count);
         }
 
         @Override
@@ -227,14 +216,4 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
             super.onInvalidated();
         }
     };
-
-    private void onDataSetChangedInternal()
-    {
-        int count = getViewPagerInfoListener().getPageCount();
-        onDataSetChanged(count);
-        getViewPagerInfoListener().notifySelected();
-    }
-
-    protected abstract void onDataSetChanged(int count);
-
 }

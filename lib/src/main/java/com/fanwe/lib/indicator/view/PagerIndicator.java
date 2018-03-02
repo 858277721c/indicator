@@ -25,10 +25,10 @@ import android.widget.FrameLayout;
 
 import com.fanwe.lib.indicator.R;
 import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.common.utils.FViewPagerInfoListener;
 import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.viewpager.helper.FPagerSelectChangeListener;
 
 public class PagerIndicator extends FrameLayout
 {
@@ -55,8 +55,6 @@ public class PagerIndicator extends FrameLayout
     private PagerIndicatorGroup mPagerIndicatorGroup;
     private ViewGroup mPagerIndicatorTrackContainer;
 
-    private FViewPagerInfoListener mViewPagerInfoListener;
-
     private void init()
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_pager_indicator, this, true);
@@ -66,29 +64,26 @@ public class PagerIndicator extends FrameLayout
         mPagerIndicatorTrackContainer = findViewById(R.id.view_indicator_track_container);
     }
 
-    private FViewPagerInfoListener getViewPagerInfoListener()
+    private FPagerSelectChangeListener mPagerSelectChangeListener = new FPagerSelectChangeListener()
     {
-        if (mViewPagerInfoListener == null)
+        @Override
+        protected void onPageCountChanged(int count)
         {
-            mViewPagerInfoListener = new FViewPagerInfoListener();
-            mViewPagerInfoListener.setOnPageSelectedChangeCallback(new FViewPagerInfoListener.OnPageSelectedChangeCallback()
-            {
-                @Override
-                public void onSelectedChanged(int position, boolean selected)
-                {
-                    if (selected)
-                    {
-                        IPagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(position);
-                        if (item != null)
-                        {
-                            mHorizontalScrollView.smoothScrollTo((View) item);
-                        }
-                    }
-                }
-            });
         }
-        return mViewPagerInfoListener;
-    }
+
+        @Override
+        protected void onSelectChanged(int index, boolean selected)
+        {
+            if (selected)
+            {
+                IPagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(index);
+                if (item != null)
+                {
+                    mHorizontalScrollView.smoothScrollTo((View) item);
+                }
+            }
+        }
+    };
 
     /**
      * 设置ViewPager
@@ -98,7 +93,7 @@ public class PagerIndicator extends FrameLayout
     public void setViewPager(ViewPager viewPager)
     {
         mPagerIndicatorGroup.setViewPager(viewPager);
-        getViewPagerInfoListener().setViewPager(viewPager);
+        mPagerSelectChangeListener.setViewPager(viewPager);
     }
 
     /**

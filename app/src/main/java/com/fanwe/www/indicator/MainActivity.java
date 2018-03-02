@@ -13,17 +13,10 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public void onClickIndicatorActivity(View view)
     {
         startActivity(new Intent(this, IndicatorActivity.class));
     }
-
-    public void onClickViewPagerInfoActivity(View view)
-    {
-        startActivity(new Intent(this, ViewPagerInfoActivity.class));
-    }
-
 }

@@ -119,7 +119,7 @@ public class LinePagerIndicatorTrack extends View implements IPagerIndicatorTrac
     }
 
     @Override
-    public void onSelectedChanged(int position, boolean selected, PositionData positionData)
+    public void onSelectChanged(int position, boolean selected, PositionData positionData)
     {
 
     }

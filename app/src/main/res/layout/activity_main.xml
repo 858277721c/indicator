@@ -8,13 +8,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickViewPagerInfoActivity"
-        android:text="ViewPagerInfoActivity"
-        android:textAllCaps="false"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:onClick="onClickIndicatorActivity"
         android:text="IndicatorActivity"
         android:textAllCaps="false"/>

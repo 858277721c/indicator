@@ -47,5 +47,5 @@ public interface IPagerIndicatorTrack
      * @param selected     true-选中，false-未选中
      * @param positionData 当前position对应Item的位置信息
      */
-    void onSelectedChanged(int position, boolean selected, PositionData positionData);
+    void onSelectChanged(int position, boolean selected, PositionData positionData);
 }

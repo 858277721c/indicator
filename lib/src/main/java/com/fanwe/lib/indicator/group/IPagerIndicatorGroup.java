@@ -99,5 +99,5 @@ public interface IPagerIndicatorGroup
      * @param position 第几页
      * @param selected true-选中，false-未选中
      */
-    void onSelectedChanged(int position, boolean selected);
+    void onSelectChanged(int position, boolean selected);
 }

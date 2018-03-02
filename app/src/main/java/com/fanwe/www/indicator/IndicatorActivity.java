@@ -36,7 +36,7 @@ public class IndicatorActivity extends AppCompatActivity
         {
             View view = getLayoutInflater().inflate(R.layout.item_vpg, viewGroup, false);
 
-            TextView textView = (TextView) view.findViewById(R.id.btn);
+            TextView textView =  view.findViewById(R.id.btn);
             textView.setText(getData(position).name);
             textView.setOnClickListener(new View.OnClickListener()
             {
