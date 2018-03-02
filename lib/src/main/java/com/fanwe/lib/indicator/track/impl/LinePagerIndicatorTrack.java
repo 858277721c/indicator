@@ -23,8 +23,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.fanwe.lib.indicator.model.PositionData;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
-import com.fanwe.lib.indicator.common.model.PositionData;
 
 /**
  * 线形的Item追踪view（开发中，未完成）

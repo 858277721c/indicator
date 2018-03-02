@@ -15,7 +15,7 @@
  */
 package com.fanwe.lib.indicator.item;
 
-import com.fanwe.lib.indicator.common.model.PositionData;
+import com.fanwe.lib.indicator.model.PositionData;
 
 /**
  * ViewPager指示器Item

@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.fanwe.lib.indicator.R;
-import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;

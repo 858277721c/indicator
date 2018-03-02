@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fanwe.lib.indicator.common.adapter;
+package com.fanwe.lib.indicator.adapter;
 
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;

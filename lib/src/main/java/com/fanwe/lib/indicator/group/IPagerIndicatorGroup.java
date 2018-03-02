@@ -17,7 +17,7 @@ package com.fanwe.lib.indicator.group;
 
 import android.support.v4.view.ViewPager;
 
-import com.fanwe.lib.indicator.common.adapter.PagerIndicatorAdapter;
+import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
 

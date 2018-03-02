@@ -15,7 +15,7 @@
  */
 package com.fanwe.lib.indicator.track;
 
-import com.fanwe.lib.indicator.common.model.PositionData;
+import com.fanwe.lib.indicator.model.PositionData;
 
 /**
  * ViewPager指示器，可追踪指示器Item的view

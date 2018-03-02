@@ -21,8 +21,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.fanwe.lib.indicator.R;
-import com.fanwe.lib.indicator.common.model.PositionData;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.model.PositionData;
 
 public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
 {
