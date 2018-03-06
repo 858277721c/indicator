@@ -27,7 +27,7 @@ public interface IPagerIndicatorItem
      *
      * @param selected true-选中，false-未选中
      */
-    void onSelectedChanged(boolean selected);
+    void onSelectChanged(boolean selected);
 
     /**
      * ViewPager页面显示的百分比回调

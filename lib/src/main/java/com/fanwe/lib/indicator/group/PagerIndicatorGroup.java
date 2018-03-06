@@ -190,7 +190,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         IPagerIndicatorItem item = getPagerIndicatorItem(position);
         if (item != null)
         {
-            item.onSelectedChanged(selected);
+            item.onSelectChanged(selected);
 
             if (getPagerIndicatorTrack() != null)
             {

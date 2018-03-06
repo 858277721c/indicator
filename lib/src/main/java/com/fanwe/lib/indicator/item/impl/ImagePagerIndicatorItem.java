@@ -52,7 +52,7 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
         mImageView = new ImageView(getContext());
         addView(mImageView);
 
-        onSelectedChanged(false);
+        onSelectChanged(false);
     }
 
     public ImageView getImageView()
@@ -75,7 +75,7 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
     }
 
     @Override
-    public void onSelectedChanged(boolean selected)
+    public void onSelectChanged(boolean selected)
     {
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getImageView().getLayoutParams();
         if (selected)
