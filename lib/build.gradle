@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20180306
-        versionName "1.0.6"
+        versionCode 20180402
+        versionName "1.0.7"
 
     }
     buildTypes {
@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.zj565061763:viewpager-helper:aa5caccd16'
+    compile 'com.github.zj565061763:viewpager-helper:1.0.1'
     provided 'com.android.support:support-v4:26.1.0'
 }
 
