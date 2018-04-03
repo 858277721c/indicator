@@ -73,7 +73,7 @@ public class LinePagerIndicatorTrack extends View implements IPagerIndicatorTrac
     }
 
     @Override
-    public void onPageCountChanged(int count)
+    public void onDataSetChanged(int count)
     {
         if (count <= 0)
         {

@@ -92,9 +92,10 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     private FPagerSelectChangeListener mPagerSelectChangeListener = new FPagerSelectChangeListener()
     {
         @Override
-        protected void onPageCountChanged(int count)
+        protected void onDataSetChanged()
         {
-            PagerIndicatorGroup.this.onPageCountChanged(count);
+            PagerIndicatorGroup.this.onDataSetChanged(getAdapterCount());
+            super.onDataSetChanged();
         }
 
         @Override
@@ -161,12 +162,11 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     }
 
     @Override
-    public void onPageCountChanged(int count)
+    public void onDataSetChanged(int count)
     {
-        onDataSetChanged(count);
         if (getPagerIndicatorTrack() != null)
         {
-            getPagerIndicatorTrack().onPageCountChanged(count);
+            getPagerIndicatorTrack().onDataSetChanged(count);
         }
     }
 
@@ -206,9 +206,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         public void onChanged()
         {
             super.onChanged();
-
-            final int pageCount = mViewPagerHolder.getAdapterCount();
-            onDataSetChanged(pageCount);
+            onDataSetChanged(mViewPagerHolder.getAdapterCount());
         }
 
         @Override
@@ -217,6 +215,4 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
             super.onInvalidated();
         }
     };
-
-    protected abstract void onDataSetChanged(int pageCount);
 }

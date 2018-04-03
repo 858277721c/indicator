@@ -23,11 +23,11 @@ import com.fanwe.lib.indicator.model.PositionData;
 public interface IPagerIndicatorTrack
 {
     /**
-     * ViewPager页数变化回调
+     * 数据集变化回调
      *
      * @param count
      */
-    void onPageCountChanged(int count);
+    void onDataSetChanged(int count);
 
     /**
      * ViewPager页面显示的百分比回调

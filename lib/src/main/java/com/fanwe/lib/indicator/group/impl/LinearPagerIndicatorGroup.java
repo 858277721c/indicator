@@ -72,8 +72,9 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
     }
 
     @Override
-    protected void onDataSetChanged(int pageCount)
+    public void onDataSetChanged(int pageCount)
     {
+        super.onDataSetChanged(pageCount);
         removeAllViews();
         onAddPagerIndicatorItem(pageCount);
     }

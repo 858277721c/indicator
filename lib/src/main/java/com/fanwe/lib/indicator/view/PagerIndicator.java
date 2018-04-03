@@ -67,11 +67,6 @@ public class PagerIndicator extends FrameLayout
     private FPagerSelectChangeListener mPagerSelectChangeListener = new FPagerSelectChangeListener()
     {
         @Override
-        protected void onPageCountChanged(int count)
-        {
-        }
-
-        @Override
         protected void onSelectChanged(int index, boolean selected)
         {
             if (selected)
@@ -92,8 +87,8 @@ public class PagerIndicator extends FrameLayout
      */
     public void setViewPager(ViewPager viewPager)
     {
-        mPagerIndicatorGroup.setViewPager(viewPager);
         mPagerSelectChangeListener.setViewPager(viewPager);
+        mPagerIndicatorGroup.setViewPager(viewPager);
     }
 
     /**
