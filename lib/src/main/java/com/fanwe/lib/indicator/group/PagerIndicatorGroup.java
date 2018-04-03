@@ -26,6 +26,7 @@ import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.viewpager.helper.FPagerDataSetObserver;
 import com.fanwe.lib.viewpager.helper.FPagerPercentChangeListener;
 import com.fanwe.lib.viewpager.helper.FPagerSelectChangeListener;
 import com.fanwe.lib.viewpager.helper.FViewPagerHolder;
@@ -76,6 +77,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         {
             mPagerSelectChangeListener.setViewPager(viewPager);
             mPagerPercentChangeListener.setViewPager(viewPager);
+            mPagerDataSetObserver.setViewPager(viewPager);
         }
 
         @Override
@@ -83,6 +85,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         {
             mPagerSelectChangeListener.setViewPager(viewPager);
             mPagerPercentChangeListener.setViewPager(viewPager);
+            mPagerDataSetObserver.setViewPager(viewPager);
         }
     };
 
@@ -113,6 +116,19 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
         {
             PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
+        }
+    };
+
+    /**
+     * 数据集变化监听
+     */
+    private FPagerDataSetObserver mPagerDataSetObserver = new FPagerDataSetObserver()
+    {
+        @Override
+        protected void onChanged()
+        {
+            final int count = mViewPagerHolder.getAdapterCount();
+            onPageCountChanged(count);
         }
     };
 
@@ -206,7 +222,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         {
             super.onChanged();
 
-            int count = mViewPagerHolder.getAdapterCount();
+            final int count = mViewPagerHolder.getAdapterCount();
             onPageCountChanged(count);
         }
 
