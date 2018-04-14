@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.fanwe.lib.adapter.FPagerAdapter;
 import com.fanwe.lib.indicator.view.PagerIndicator;
-import com.fanwe.library.adapter.SDPagerAdapter;
 
 public class IndicatorActivity extends AppCompatActivity
 {
@@ -20,30 +20,32 @@ public class IndicatorActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indicator);
-        vpg_content = (ViewPager) findViewById(R.id.vpg_content);
-        view_indicator = (PagerIndicator) findViewById(R.id.view_indicator);
+        vpg_content = findViewById(R.id.vpg_content);
+        view_indicator = findViewById(R.id.view_indicator);
 
         view_indicator.setViewPager(vpg_content);
 
         vpg_content.setAdapter(mPagerAdapter);
-        mPagerAdapter.updateData(DataModel.get(10));
+        mPagerAdapter.getDataHolder().setData(DataModel.get(10));
     }
 
-    private SDPagerAdapter<DataModel> mPagerAdapter = new SDPagerAdapter<DataModel>(null, this)
+    private FPagerAdapter<DataModel> mPagerAdapter = new FPagerAdapter<DataModel>(this)
     {
         @Override
         public View getView(ViewGroup viewGroup, final int position)
         {
+            final DataModel model = getDataHolder().get(position);
+
             View view = getLayoutInflater().inflate(R.layout.item_vpg, viewGroup, false);
 
-            TextView textView =  view.findViewById(R.id.btn);
-            textView.setText(getData(position).name);
+            TextView textView = view.findViewById(R.id.btn);
+            textView.setText(model.name);
             textView.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
-                    removeData(position);
+                    getDataHolder().removeData(model);
                 }
             });
 
