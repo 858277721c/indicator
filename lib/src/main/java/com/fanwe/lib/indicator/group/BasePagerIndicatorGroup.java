@@ -74,7 +74,7 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
         @Override
         protected void onViewPagerChanged(ViewPager newPager, ViewPager oldPager)
         {
-            mPagerSelectChangeListener.setViewPager(newPager);
+            mPagerSelectedChangeListener.setViewPager(newPager);
             mPagerPercentChangeListener.setViewPager(newPager);
         }
     };
@@ -82,7 +82,7 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
     /**
      * 页面数量变化和选中监听
      */
-    private final FPagerSelectedChangeListener mPagerSelectChangeListener = new FPagerSelectedChangeListener()
+    private final FPagerSelectedChangeListener mPagerSelectedChangeListener = new FPagerSelectedChangeListener()
     {
         @Override
         protected void onDataSetChanged()
@@ -126,14 +126,12 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
     public void setAdapter(PagerIndicatorAdapter adapter)
     {
         if (mAdapter != null)
-        {
             mAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
-        }
+
         mAdapter = adapter;
+
         if (adapter != null)
-        {
             adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
-        }
     }
 
     @Override
@@ -157,43 +155,40 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
     @Override
     public void onDataSetChanged(int count)
     {
-        if (getPagerIndicatorTrack() != null)
-        {
-            getPagerIndicatorTrack().onDataSetChanged(count);
-        }
+        final PagerIndicatorTrack track = getPagerIndicatorTrack();
+        if (track != null)
+            track.onDataSetChanged(count);
     }
 
     @Override
     public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
     {
-        PagerIndicatorItem item = getPagerIndicatorItem(position);
+        final PagerIndicatorItem item = getPagerIndicatorItem(position);
         if (item != null)
         {
             item.onShowPercent(showPercent, isEnter, isMoveLeft);
 
-            if (getPagerIndicatorTrack() != null)
-            {
-                getPagerIndicatorTrack().onShowPercent(position, showPercent, isEnter, isMoveLeft, item.getPositionData());
-            }
+            final PagerIndicatorTrack track = getPagerIndicatorTrack();
+            if (track != null)
+                track.onShowPercent(position, showPercent, isEnter, isMoveLeft, item.getPositionData());
         }
     }
 
     @Override
     public void onSelectChanged(int position, boolean selected)
     {
-        PagerIndicatorItem item = getPagerIndicatorItem(position);
+        final PagerIndicatorItem item = getPagerIndicatorItem(position);
         if (item != null)
         {
             item.onSelectChanged(selected);
 
-            if (getPagerIndicatorTrack() != null)
-            {
-                getPagerIndicatorTrack().onSelectChanged(position, selected, item.getPositionData());
-            }
+            final PagerIndicatorTrack track = getPagerIndicatorTrack();
+            if (track != null)
+                track.onSelectChanged(position, selected, item.getPositionData());
         }
     }
 
-    private DataSetObserver mIndicatorAdapterDataSetObserver = new DataSetObserver()
+    private final DataSetObserver mIndicatorAdapterDataSetObserver = new DataSetObserver()
     {
         @Override
         public void onChanged()
