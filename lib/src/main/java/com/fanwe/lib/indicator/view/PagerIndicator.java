@@ -21,10 +21,10 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 
 import com.fanwe.lib.indicator.R;
-import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
@@ -93,7 +93,7 @@ public class PagerIndicator extends FrameLayout
      *
      * @param adapter
      */
-    public void setAdapter(PagerIndicatorAdapter adapter)
+    public void setAdapter(BaseAdapter adapter)
     {
         mPagerIndicatorGroup.setAdapter(adapter);
     }
@@ -103,7 +103,7 @@ public class PagerIndicator extends FrameLayout
      *
      * @return
      */
-    public PagerIndicatorAdapter getAdapter()
+    public BaseAdapter getAdapter()
     {
         return mPagerIndicatorGroup.getAdapter();
     }
@@ -133,7 +133,7 @@ public class PagerIndicator extends FrameLayout
                 mPagerIndicatorTrackContainer.removeAllViews();
 
             mPagerIndicatorGroup.setPagerIndicatorTrack(track);
-            
+
             if (track != null)
             {
                 if (track instanceof View)

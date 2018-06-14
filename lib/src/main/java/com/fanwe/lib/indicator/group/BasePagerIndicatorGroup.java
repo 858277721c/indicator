@@ -19,10 +19,11 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
-import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
 import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
@@ -53,16 +54,34 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
         init();
     }
 
-    private PagerIndicatorAdapter mAdapter;
+    private BaseAdapter mAdapter;
     private PagerIndicatorTrack mPagerIndicatorTrack;
 
     private void init()
     {
         //设置一个默认的Adapter
-        setAdapter(new PagerIndicatorAdapter()
+        setAdapter(new BaseAdapter()
         {
             @Override
-            public PagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent)
+            public int getCount()
+            {
+                return 0;
+            }
+
+            @Override
+            public Object getItem(int position)
+            {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position)
+            {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent)
             {
                 return new ImagePagerIndicatorItem(getContext());
             }
@@ -123,7 +142,7 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
     }
 
     @Override
-    public void setAdapter(PagerIndicatorAdapter adapter)
+    public void setAdapter(BaseAdapter adapter)
     {
         if (mAdapter != null)
             mAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
@@ -138,7 +157,7 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
     }
 
     @Override
-    public PagerIndicatorAdapter getAdapter()
+    public BaseAdapter getAdapter()
     {
         return mAdapter;
     }
