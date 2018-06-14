@@ -50,7 +50,7 @@ public abstract class PagerIndicatorAdapter
      */
     public final View createPagerIndicatorItem(int position, ViewGroup viewParent)
     {
-        PagerIndicatorItem item = onCreatePagerIndicatorItem(position, viewParent);
+        final PagerIndicatorItem item = onCreatePagerIndicatorItem(position, viewParent);
         if (item instanceof View)
         {
             return (View) item;
