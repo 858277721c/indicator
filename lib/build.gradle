@@ -1,17 +1,15 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = 'com.github.zj565061763'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 27
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 20180510
-        versionName "1.0.11"
-
+        versionCode 20180614
+        versionName "1.0.12"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,39 +19,23 @@ android {
 }
 
 dependencies {
-    api 'com.github.zj565061763:viewpager-helper:1.0.4'
-    compileOnly 'com.android.support:support-v4:27.1.1'
+    api 'com.fanwe.android:viewpager-helper:1.0.5'
+    compileOnly 'com.android.support:support-v4:+'
 }
 
-// 指定编码
+publish {
+    userOrg = 'zj565061763'
+    groupId = 'com.fanwe.android'
+
+    artifactId = 'indicator'
+    publishVersion = '1.0.12'
+    desc = 'android viewpager indicator library'
+    website = 'https://github.com/zj565061763/indicator'
+}
+
 tasks.withType(Javadoc) {
     options {
         encoding "UTF-8"
         charSet 'UTF-8'
-        failOnError false
     }
-}
-
-// 打包源码
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    failOnError false
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
-}
-
-// 制作文档(Javadoc)
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
 }

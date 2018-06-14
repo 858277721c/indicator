@@ -1,5 +1,10 @@
-## About
+# About
 ViewPager指示器
 
-## Gradle
-[![](https://jitpack.io/v/zj565061763/indicator.svg)](https://jitpack.io/#zj565061763/indicator)
+# Gradle
+```
+implementation 'com.fanwe.android:indicator:1.0.12'
+
+// 依赖以下库
+implementation 'com.android.support:support-v4:+'
+```
