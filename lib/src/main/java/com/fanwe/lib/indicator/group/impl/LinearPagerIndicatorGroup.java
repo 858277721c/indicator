@@ -58,16 +58,6 @@ public class LinearPagerIndicatorGroup extends BasePagerIndicatorGroup
     @Override
     public PagerIndicatorItem getPagerIndicatorItem(int position)
     {
-        if (position < 0)
-        {
-            return null;
-        }
-        final int childCount = getChildCount();
-        if (position >= childCount)
-        {
-            return null;
-        }
-
         return (PagerIndicatorItem) getChildAt(position);
     }
 
@@ -87,22 +77,21 @@ public class LinearPagerIndicatorGroup extends BasePagerIndicatorGroup
     protected void onAddPagerIndicatorItem(int count)
     {
         if (count <= 0)
-        {
             return;
-        }
+
         final PagerIndicatorAdapter adapter = getAdapter();
         if (adapter == null)
-        {
             return;
-        }
+
         for (int i = 0; i < count; i++)
         {
-            View view = adapter.createPagerIndicatorItem(i, this);
+            final View view = adapter.createPagerIndicatorItem(i, this);
 
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if (params == null)
             {
-                params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
                 view.setLayoutParams(params);
             }
 
@@ -113,11 +102,9 @@ public class LinearPagerIndicatorGroup extends BasePagerIndicatorGroup
                     @Override
                     public void onClick(View v)
                     {
-                        ViewPager viewPager = getViewPager();
+                        final ViewPager viewPager = getViewPager();
                         if (viewPager != null)
-                        {
                             viewPager.setCurrentItem(indexOfChild(v));
-                        }
                     }
                 });
             }
