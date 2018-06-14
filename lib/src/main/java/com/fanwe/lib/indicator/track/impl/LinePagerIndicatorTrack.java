@@ -24,12 +24,12 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.fanwe.lib.indicator.model.PositionData;
-import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
 
 /**
  * 线形的Item追踪view（开发中，未完成）
  */
-public class LinePagerIndicatorTrack extends View implements IPagerIndicatorTrack
+public class LinePagerIndicatorTrack extends View implements PagerIndicatorTrack
 {
     public LinePagerIndicatorTrack(Context context)
     {

@@ -20,7 +20,7 @@ import com.fanwe.lib.indicator.model.PositionData;
 /**
  * ViewPager指示器Item
  */
-public interface IPagerIndicatorItem
+public interface PagerIndicatorItem
 {
     /**
      * 选中或者非选中回调

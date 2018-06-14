@@ -15,197 +15,89 @@
  */
 package com.fanwe.lib.indicator.group;
 
-import android.content.Context;
-import android.database.DataSetObserver;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
-import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
-import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
-import com.fanwe.lib.viewpager.helper.FPagerPercentChangeListener;
-import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
-import com.fanwe.lib.viewpager.helper.FViewPagerHolder;
+import com.fanwe.lib.indicator.item.PagerIndicatorItem;
+import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
 
 /**
  * ViewPager指示器Group
  */
-public abstract class PagerIndicatorGroup extends LinearLayout implements IPagerIndicatorGroup
+public interface PagerIndicatorGroup
 {
-    public PagerIndicatorGroup(Context context)
-    {
-        super(context);
-        init();
-    }
-
-    public PagerIndicatorGroup(Context context, AttributeSet attrs)
-    {
-        super(context, attrs);
-        init();
-    }
-
-    public PagerIndicatorGroup(Context context, AttributeSet attrs, int defStyleAttr)
-    {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    private PagerIndicatorAdapter mAdapter;
-    private IPagerIndicatorTrack mPagerIndicatorTrack;
-
-    private void init()
-    {
-        //设置一个默认的Adapter
-        setAdapter(new PagerIndicatorAdapter()
-        {
-            @Override
-            public IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent)
-            {
-                return new ImagePagerIndicatorItem(getContext());
-            }
-        });
-    }
-
-    private final FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
-    {
-        @Override
-        protected void onViewPagerChanged(ViewPager newPager, ViewPager oldPager)
-        {
-            mPagerSelectChangeListener.setViewPager(newPager);
-            mPagerPercentChangeListener.setViewPager(newPager);
-        }
-    };
+    /**
+     * 设置ViewPager
+     *
+     * @param viewPager
+     */
+    void setViewPager(ViewPager viewPager);
 
     /**
-     * 页面数量变化和选中监听
+     * 返回设置的ViewPager
+     *
+     * @return
      */
-    private final FPagerSelectedChangeListener mPagerSelectChangeListener = new FPagerSelectedChangeListener()
-    {
-        @Override
-        protected void onDataSetChanged()
-        {
-            PagerIndicatorGroup.this.onDataSetChanged(getAdapterCount());
-            super.onDataSetChanged();
-        }
-
-        @Override
-        protected void onSelectedChanged(int index, boolean selected)
-        {
-            PagerIndicatorGroup.this.onSelectChanged(index, selected);
-        }
-    };
+    ViewPager getViewPager();
 
     /**
-     * 滚动百分比监听
+     * 设置适配器
+     *
+     * @param adapter
      */
-    private final FPagerPercentChangeListener mPagerPercentChangeListener = new FPagerPercentChangeListener()
-    {
-        @Override
-        public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
-        {
-            PagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
-        }
-    };
+    void setAdapter(PagerIndicatorAdapter adapter);
 
-    @Override
-    public void setViewPager(ViewPager viewPager)
-    {
-        mViewPagerHolder.setViewPager(viewPager);
-    }
+    /**
+     * 返回设置的适配器
+     *
+     * @return
+     */
+    PagerIndicatorAdapter getAdapter();
 
-    @Override
-    public ViewPager getViewPager()
-    {
-        return mViewPagerHolder.getViewPager();
-    }
+    /**
+     * 设置追踪指示器Item的view
+     *
+     * @param pagerIndicatorTrack
+     */
+    void setPagerIndicatorTrack(PagerIndicatorTrack pagerIndicatorTrack);
 
-    @Override
-    public void setAdapter(PagerIndicatorAdapter adapter)
-    {
-        if (mAdapter != null)
-        {
-            mAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
-        }
-        mAdapter = adapter;
-        if (adapter != null)
-        {
-            adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
-        }
-    }
+    /**
+     * 返回跟随指示器Item的view
+     *
+     * @return
+     */
+    PagerIndicatorTrack getPagerIndicatorTrack();
 
-    @Override
-    public PagerIndicatorAdapter getAdapter()
-    {
-        return mAdapter;
-    }
+    /**
+     * 返回position位置对应的Item
+     *
+     * @param position
+     * @return
+     */
+    PagerIndicatorItem getPagerIndicatorItem(int position);
 
-    @Override
-    public void setPagerIndicatorTrack(IPagerIndicatorTrack pagerIndicatorTrack)
-    {
-        mPagerIndicatorTrack = pagerIndicatorTrack;
-    }
+    /**
+     * 数据集变化回调
+     *
+     * @param count
+     */
+    void onDataSetChanged(int count);
 
-    @Override
-    public IPagerIndicatorTrack getPagerIndicatorTrack()
-    {
-        return mPagerIndicatorTrack;
-    }
+    /**
+     * ViewPager页面显示的百分比回调
+     *
+     * @param position    第几页
+     * @param showPercent 显示的百分比[0-1]
+     * @param isEnter     true-当前页面处于进入状态，false-当前页面处于离开状态
+     * @param isMoveLeft  true-ViewPager内容向左移动，false-ViewPager内容向右移动
+     */
+    void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft);
 
-    @Override
-    public void onDataSetChanged(int count)
-    {
-        if (getPagerIndicatorTrack() != null)
-        {
-            getPagerIndicatorTrack().onDataSetChanged(count);
-        }
-    }
-
-    @Override
-    public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
-    {
-        IPagerIndicatorItem item = getPagerIndicatorItem(position);
-        if (item != null)
-        {
-            item.onShowPercent(showPercent, isEnter, isMoveLeft);
-
-            if (getPagerIndicatorTrack() != null)
-            {
-                getPagerIndicatorTrack().onShowPercent(position, showPercent, isEnter, isMoveLeft, item.getPositionData());
-            }
-        }
-    }
-
-    @Override
-    public void onSelectChanged(int position, boolean selected)
-    {
-        IPagerIndicatorItem item = getPagerIndicatorItem(position);
-        if (item != null)
-        {
-            item.onSelectChanged(selected);
-
-            if (getPagerIndicatorTrack() != null)
-            {
-                getPagerIndicatorTrack().onSelectChanged(position, selected, item.getPositionData());
-            }
-        }
-    }
-
-    private DataSetObserver mIndicatorAdapterDataSetObserver = new DataSetObserver()
-    {
-        @Override
-        public void onChanged()
-        {
-            super.onChanged();
-            onDataSetChanged(mViewPagerHolder.getAdapterCount());
-        }
-
-        @Override
-        public void onInvalidated()
-        {
-            super.onInvalidated();
-        }
-    };
+    /**
+     * ViewPager某一页选中或者非选中回调
+     *
+     * @param position 第几页
+     * @param selected true-选中，false-未选中
+     */
+    void onSelectChanged(int position, boolean selected);
 }

@@ -20,7 +20,7 @@ import com.fanwe.lib.indicator.model.PositionData;
 /**
  * ViewPager指示器，可追踪指示器Item的view
  */
-public interface IPagerIndicatorTrack
+public interface PagerIndicatorTrack
 {
     /**
      * 数据集变化回调

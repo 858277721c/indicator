@@ -20,7 +20,7 @@ import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 
 public abstract class PagerIndicatorAdapter
 {
@@ -50,7 +50,7 @@ public abstract class PagerIndicatorAdapter
      */
     public final View createPagerIndicatorItem(int position, ViewGroup viewParent)
     {
-        IPagerIndicatorItem item = onCreatePagerIndicatorItem(position, viewParent);
+        PagerIndicatorItem item = onCreatePagerIndicatorItem(position, viewParent);
         if (item instanceof View)
         {
             return (View) item;
@@ -67,6 +67,6 @@ public abstract class PagerIndicatorAdapter
      * @param viewParent
      * @return
      */
-    protected abstract IPagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent);
+    protected abstract PagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent);
 
 }

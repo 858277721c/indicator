@@ -23,13 +23,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
-import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.group.BasePagerIndicatorGroup;
+import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 
 /**
  * 线性的ViewPager指示器Group
  */
-public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
+public class LinearPagerIndicatorGroup extends BasePagerIndicatorGroup
 {
     public LinearPagerIndicatorGroup(Context context)
     {
@@ -56,7 +56,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
     }
 
     @Override
-    public IPagerIndicatorItem getPagerIndicatorItem(int position)
+    public PagerIndicatorItem getPagerIndicatorItem(int position)
     {
         if (position < 0)
         {
@@ -68,7 +68,7 @@ public class LinearPagerIndicatorGroup extends PagerIndicatorGroup
             return null;
         }
 
-        return (IPagerIndicatorItem) getChildAt(position);
+        return (PagerIndicatorItem) getChildAt(position);
     }
 
     @Override

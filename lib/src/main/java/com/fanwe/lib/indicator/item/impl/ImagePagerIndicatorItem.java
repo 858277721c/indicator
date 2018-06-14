@@ -21,10 +21,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.fanwe.lib.indicator.R;
-import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
+import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.model.PositionData;
 
-public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndicatorItem
+public class ImagePagerIndicatorItem extends FrameLayout implements PagerIndicatorItem
 {
     public ImagePagerIndicatorItem(Context context)
     {
@@ -63,9 +63,7 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
     public IndicatorConfig getIndicatorConfig()
     {
         if (mIndicatorConfig == null)
-        {
             mIndicatorConfig = new IndicatorConfig(getContext());
-        }
         return mIndicatorConfig;
     }
 
@@ -77,7 +75,7 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
     @Override
     public void onSelectChanged(boolean selected)
     {
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getImageView().getLayoutParams();
+        final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getImageView().getLayoutParams();
         if (selected)
         {
             params.width = getIndicatorConfig().widthSelected;
@@ -111,9 +109,7 @@ public class ImagePagerIndicatorItem extends FrameLayout implements IPagerIndica
     public PositionData getPositionData()
     {
         if (mPositionData == null)
-        {
             mPositionData = new PositionData();
-        }
         return mPositionData;
     }
 

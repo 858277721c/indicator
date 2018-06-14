@@ -25,9 +25,9 @@ import android.widget.FrameLayout;
 
 import com.fanwe.lib.indicator.R;
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
-import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
-import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
+import com.fanwe.lib.indicator.group.BasePagerIndicatorGroup;
+import com.fanwe.lib.indicator.item.PagerIndicatorItem;
+import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
 import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
 
 public class PagerIndicator extends FrameLayout
@@ -52,7 +52,7 @@ public class PagerIndicator extends FrameLayout
 
     private TrackHorizontalScrollView mHorizontalScrollView;
 
-    private PagerIndicatorGroup mPagerIndicatorGroup;
+    private BasePagerIndicatorGroup mPagerIndicatorGroup;
     private ViewGroup mPagerIndicatorTrackContainer;
 
     private void init()
@@ -71,7 +71,7 @@ public class PagerIndicator extends FrameLayout
         {
             if (selected)
             {
-                final IPagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(index);
+                final PagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(index);
                 if (item != null)
                     mHorizontalScrollView.smoothScrollTo((View) item);
             }
@@ -115,7 +115,7 @@ public class PagerIndicator extends FrameLayout
      * @param position
      * @return
      */
-    public IPagerIndicatorItem getPagerIndicatorItem(int position)
+    public PagerIndicatorItem getPagerIndicatorItem(int position)
     {
         return mPagerIndicatorGroup.getPagerIndicatorItem(position);
     }
@@ -125,9 +125,9 @@ public class PagerIndicator extends FrameLayout
      *
      * @param pagerIndicatorTrack
      */
-    public void setPagerIndicatorTrack(IPagerIndicatorTrack pagerIndicatorTrack)
+    public void setPagerIndicatorTrack(PagerIndicatorTrack pagerIndicatorTrack)
     {
-        final IPagerIndicatorTrack oldTrack = mPagerIndicatorGroup.getPagerIndicatorTrack();
+        final PagerIndicatorTrack oldTrack = mPagerIndicatorGroup.getPagerIndicatorTrack();
         if (oldTrack != pagerIndicatorTrack)
         {
             if (oldTrack != null)
