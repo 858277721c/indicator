@@ -131,10 +131,7 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
         mAdapter = adapter;
 
         if (adapter != null)
-        {
             adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
-            adapter.notifyDataSetChanged();
-        }
     }
 
     @Override

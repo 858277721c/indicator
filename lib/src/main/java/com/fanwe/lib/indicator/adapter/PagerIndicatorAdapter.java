@@ -68,5 +68,4 @@ public abstract class PagerIndicatorAdapter
      * @return
      */
     protected abstract PagerIndicatorItem onCreatePagerIndicatorItem(int position, ViewGroup viewParent);
-
 }

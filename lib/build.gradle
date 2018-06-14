@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 20180614
-        versionName "1.0.13"
+        versionName "1.0.14"
     }
 
     buildTypes {
@@ -28,7 +28,7 @@ publish {
     groupId = 'com.fanwe.android'
 
     artifactId = 'indicator'
-    publishVersion = '1.0.13'
+    publishVersion = '1.0.14'
     desc = 'android viewpager indicator library'
     website = 'https://github.com/zj565061763/indicator'
 }
