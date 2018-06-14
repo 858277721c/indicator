@@ -21,8 +21,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
+import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.group.BasePagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 
@@ -79,15 +79,13 @@ public class LinearPagerIndicatorGroup extends BasePagerIndicatorGroup
         if (count <= 0)
             return;
 
-        final BaseAdapter adapter = getAdapter();
+        final PagerIndicatorAdapter adapter = getAdapter();
         if (adapter == null)
             return;
 
         for (int i = 0; i < count; i++)
         {
-            final View view = adapter.getView(i, null, this);
-            if (!(view instanceof PagerIndicatorItem))
-                throw new RuntimeException("BaseAdapter.getView() must return instance of " + PagerIndicatorItem.class);
+            final View view = adapter.createPagerIndicatorItem(i, this);
 
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if (params == null)

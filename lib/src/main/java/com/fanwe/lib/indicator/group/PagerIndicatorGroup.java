@@ -16,8 +16,8 @@
 package com.fanwe.lib.indicator.group;
 
 import android.support.v4.view.ViewPager;
-import android.widget.BaseAdapter;
 
+import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
 
@@ -45,14 +45,14 @@ public interface PagerIndicatorGroup
      *
      * @param adapter
      */
-    void setAdapter(BaseAdapter adapter);
+    void setAdapter(PagerIndicatorAdapter adapter);
 
     /**
      * 返回设置的适配器
      *
      * @return
      */
-    BaseAdapter getAdapter();
+    PagerIndicatorAdapter getAdapter();
 
     /**
      * 设置追踪指示器Item的view

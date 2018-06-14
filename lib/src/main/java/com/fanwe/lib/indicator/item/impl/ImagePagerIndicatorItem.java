@@ -75,7 +75,7 @@ public class ImagePagerIndicatorItem extends FrameLayout implements PagerIndicat
     @Override
     public void onSelectChanged(boolean selected)
     {
-        final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getImageView().getLayoutParams();
+        final LayoutParams params = (LayoutParams) getImageView().getLayoutParams();
         if (selected)
         {
             params.width = getIndicatorConfig().widthSelected;
