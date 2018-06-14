@@ -27,7 +27,7 @@ import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
 import com.fanwe.lib.viewpager.helper.FPagerPercentChangeListener;
-import com.fanwe.lib.viewpager.helper.FPagerSelectChangeListener;
+import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
 import com.fanwe.lib.viewpager.helper.FViewPagerHolder;
 
 /**
@@ -69,27 +69,20 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         });
     }
 
-    private FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
+    private final FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
     {
         @Override
-        protected void onInit(ViewPager viewPager)
+        protected void onViewPagerChanged(ViewPager newPager, ViewPager oldPager)
         {
-            mPagerSelectChangeListener.setViewPager(viewPager);
-            mPagerPercentChangeListener.setViewPager(viewPager);
-        }
-
-        @Override
-        protected void onRelease(ViewPager viewPager)
-        {
-            mPagerSelectChangeListener.setViewPager(viewPager);
-            mPagerPercentChangeListener.setViewPager(viewPager);
+            mPagerSelectChangeListener.setViewPager(newPager);
+            mPagerPercentChangeListener.setViewPager(newPager);
         }
     };
 
     /**
      * 页面数量变化和选中监听
      */
-    private FPagerSelectChangeListener mPagerSelectChangeListener = new FPagerSelectChangeListener()
+    private final FPagerSelectedChangeListener mPagerSelectChangeListener = new FPagerSelectedChangeListener()
     {
         @Override
         protected void onDataSetChanged()
@@ -99,7 +92,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
         }
 
         @Override
-        protected void onSelectChanged(int index, boolean selected)
+        protected void onSelectedChanged(int index, boolean selected)
         {
             PagerIndicatorGroup.this.onSelectChanged(index, selected);
         }
@@ -108,7 +101,7 @@ public abstract class PagerIndicatorGroup extends LinearLayout implements IPager
     /**
      * 滚动百分比监听
      */
-    private FPagerPercentChangeListener mPagerPercentChangeListener = new FPagerPercentChangeListener()
+    private final FPagerPercentChangeListener mPagerPercentChangeListener = new FPagerPercentChangeListener()
     {
         @Override
         public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)

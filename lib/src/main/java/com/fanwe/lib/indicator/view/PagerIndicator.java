@@ -28,7 +28,7 @@ import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.IPagerIndicatorItem;
 import com.fanwe.lib.indicator.track.IPagerIndicatorTrack;
-import com.fanwe.lib.viewpager.helper.FPagerSelectChangeListener;
+import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
 
 public class PagerIndicator extends FrameLayout
 {
@@ -64,18 +64,16 @@ public class PagerIndicator extends FrameLayout
         mPagerIndicatorTrackContainer = findViewById(R.id.view_indicator_track_container);
     }
 
-    private FPagerSelectChangeListener mPagerSelectChangeListener = new FPagerSelectChangeListener()
+    private final FPagerSelectedChangeListener mPagerSelectChangeListener = new FPagerSelectedChangeListener()
     {
         @Override
-        protected void onSelectChanged(int index, boolean selected)
+        protected void onSelectedChanged(int index, boolean selected)
         {
             if (selected)
             {
-                IPagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(index);
+                final IPagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(index);
                 if (item != null)
-                {
                     mHorizontalScrollView.smoothScrollTo((View) item);
-                }
             }
         }
     };
