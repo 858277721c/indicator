@@ -46,7 +46,7 @@ public class TrackHorizontalScrollView extends HorizontalScrollView
         {
             public void run()
             {
-                int scrollX = child.getLeft() - (getWidth() - child.getWidth()) / 2;
+                final int scrollX = child.getLeft() - (getWidth() - child.getWidth()) / 2;
                 smoothScrollTo(scrollX, 0);
                 mScrollRunnable = null;
             }

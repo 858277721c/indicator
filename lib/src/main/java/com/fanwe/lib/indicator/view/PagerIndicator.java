@@ -25,7 +25,7 @@ import android.widget.FrameLayout;
 
 import com.fanwe.lib.indicator.R;
 import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
-import com.fanwe.lib.indicator.group.BasePagerIndicatorGroup;
+import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
 import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
@@ -51,8 +51,7 @@ public class PagerIndicator extends FrameLayout
     }
 
     private TrackHorizontalScrollView mHorizontalScrollView;
-
-    private BasePagerIndicatorGroup mPagerIndicatorGroup;
+    private PagerIndicatorGroup mPagerIndicatorGroup;
     private ViewGroup mPagerIndicatorTrackContainer;
 
     private void init()
@@ -123,23 +122,23 @@ public class PagerIndicator extends FrameLayout
     /**
      * 设置可追踪指示器Item的view
      *
-     * @param pagerIndicatorTrack
+     * @param track
      */
-    public void setPagerIndicatorTrack(PagerIndicatorTrack pagerIndicatorTrack)
+    public void setPagerIndicatorTrack(PagerIndicatorTrack track)
     {
         final PagerIndicatorTrack oldTrack = mPagerIndicatorGroup.getPagerIndicatorTrack();
-        if (oldTrack != pagerIndicatorTrack)
+        if (oldTrack != track)
         {
             if (oldTrack != null)
-            {
                 mPagerIndicatorTrackContainer.removeAllViews();
-            }
-            mPagerIndicatorGroup.setPagerIndicatorTrack(pagerIndicatorTrack);
-            if (pagerIndicatorTrack != null)
+
+            mPagerIndicatorGroup.setPagerIndicatorTrack(track);
+            
+            if (track != null)
             {
-                if (pagerIndicatorTrack instanceof View)
+                if (track instanceof View)
                 {
-                    mPagerIndicatorTrackContainer.addView((View) pagerIndicatorTrack);
+                    mPagerIndicatorTrackContainer.addView((View) track);
                 } else
                 {
                     throw new IllegalArgumentException("pagerIndicatorView must be instance of view");
