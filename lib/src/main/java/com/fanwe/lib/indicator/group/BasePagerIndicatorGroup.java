@@ -72,7 +72,7 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
     private final FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
     {
         @Override
-        protected void onViewPagerChanged(ViewPager newPager, ViewPager oldPager)
+        protected void onViewPagerChanged(ViewPager oldPager, ViewPager newPager)
         {
             mPagerSelectedChangeListener.setViewPager(newPager);
             mPagerPercentChangeListener.setViewPager(newPager);
