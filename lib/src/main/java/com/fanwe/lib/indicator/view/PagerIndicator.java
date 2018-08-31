@@ -28,7 +28,7 @@ import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.group.PagerIndicatorGroup;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
-import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
+import com.sd.lib.viewpager.helper.FPagerSelectedChangeListener;
 
 public class PagerIndicator extends FrameLayout
 {

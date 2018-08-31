@@ -26,9 +26,9 @@ import com.fanwe.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.fanwe.lib.indicator.item.PagerIndicatorItem;
 import com.fanwe.lib.indicator.item.impl.ImagePagerIndicatorItem;
 import com.fanwe.lib.indicator.track.PagerIndicatorTrack;
-import com.fanwe.lib.viewpager.helper.FPagerPercentChangeListener;
-import com.fanwe.lib.viewpager.helper.FPagerSelectedChangeListener;
-import com.fanwe.lib.viewpager.helper.FViewPagerHolder;
+import com.sd.lib.viewpager.helper.FPagerPercentChangeListener;
+import com.sd.lib.viewpager.helper.FPagerSelectedChangeListener;
+import com.sd.lib.viewpager.helper.FViewPagerHolder;
 
 /**
  * ViewPager指示器Group
