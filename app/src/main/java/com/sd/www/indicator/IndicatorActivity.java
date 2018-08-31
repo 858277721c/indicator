@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fanwe.www.indicator.R;
 import com.sd.lib.adapter.FPagerAdapter;
 import com.sd.lib.indicator.view.PagerIndicator;
 
