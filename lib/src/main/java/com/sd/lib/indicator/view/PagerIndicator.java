@@ -1,12 +1,13 @@
 package com.sd.lib.indicator.view;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.indicator.R;
 import com.sd.lib.indicator.adapter.PagerIndicatorAdapter;

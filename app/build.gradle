@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.sd.www.indicator"
         minSdkVersion 15
@@ -19,8 +19,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.github.zj565061763:adapter:1.1.0'
+    implementation 'com.github.zj565061763:adapter:1.2.0'
     implementation project(':lib')
 }

@@ -2,10 +2,11 @@ package com.sd.lib.indicator.group;
 
 import android.content.Context;
 import android.database.DataSetObserver;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.sd.lib.indicator.item.PagerIndicatorItem;

@@ -1,6 +1,6 @@
 package com.sd.lib.indicator.group;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.sd.lib.indicator.item.PagerIndicatorItem;

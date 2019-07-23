@@ -1,11 +1,12 @@
 package com.sd.www.indicator;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.adapter.FPagerAdapter;
 import com.sd.lib.indicator.view.PagerIndicator;
