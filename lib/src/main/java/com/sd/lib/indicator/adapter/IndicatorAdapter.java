@@ -41,7 +41,7 @@ public abstract class IndicatorAdapter
             return (View) item;
         } else
         {
-            throw new IllegalArgumentException("onCreatePagerIndicatorItem method must return instance of View");
+            throw new IllegalArgumentException("onCreateIndicatorItem method must return instance of View");
         }
     }
 
