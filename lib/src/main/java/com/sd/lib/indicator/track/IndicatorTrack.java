@@ -3,9 +3,9 @@ package com.sd.lib.indicator.track;
 import com.sd.lib.indicator.model.PositionData;
 
 /**
- * ViewPager指示器，可追踪指示器Item的view
+ * 可追踪指示器Item的view
  */
-public interface PagerIndicatorTrack
+public interface IndicatorTrack
 {
     /**
      * 数据集变化回调

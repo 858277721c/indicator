@@ -30,7 +30,7 @@ public class FixLinearPagerIndicatorGroup extends BasePagerIndicatorGroup
     }
 
     @Override
-    public PagerIndicatorItem getPagerIndicatorItem(int position)
+    public PagerIndicatorItem getIndicatorItem(int position)
     {
         return (PagerIndicatorItem) getChildAt(position);
     }

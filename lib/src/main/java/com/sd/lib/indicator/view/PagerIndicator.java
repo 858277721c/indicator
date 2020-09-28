@@ -13,7 +13,6 @@ import com.sd.lib.indicator.R;
 import com.sd.lib.indicator.adapter.PagerIndicatorAdapter;
 import com.sd.lib.indicator.group.PagerIndicatorGroup;
 import com.sd.lib.indicator.item.PagerIndicatorItem;
-import com.sd.lib.indicator.track.PagerIndicatorTrack;
 import com.sd.lib.viewpager.helper.FPagerSelectedChangeListener;
 
 public class PagerIndicator extends FrameLayout
@@ -56,7 +55,7 @@ public class PagerIndicator extends FrameLayout
         {
             if (selected)
             {
-                final PagerIndicatorItem item = mPagerIndicatorGroup.getPagerIndicatorItem(index);
+                final PagerIndicatorItem item = mPagerIndicatorGroup.getIndicatorItem(index);
                 if (item != null)
                     mHorizontalScrollView.smoothScrollTo((View) item);
             }
@@ -102,7 +101,7 @@ public class PagerIndicator extends FrameLayout
      */
     public PagerIndicatorItem getPagerIndicatorItem(int position)
     {
-        return mPagerIndicatorGroup.getPagerIndicatorItem(position);
+        return mPagerIndicatorGroup.getIndicatorItem(position);
     }
 
     /**
@@ -112,13 +111,13 @@ public class PagerIndicator extends FrameLayout
      */
     public void setPagerIndicatorTrack(PagerIndicatorTrack track)
     {
-        final PagerIndicatorTrack oldTrack = mPagerIndicatorGroup.getPagerIndicatorTrack();
+        final PagerIndicatorTrack oldTrack = mPagerIndicatorGroup.getIndicatorTrack();
         if (oldTrack != track)
         {
             if (oldTrack != null)
                 mPagerIndicatorTrackContainer.removeAllViews();
 
-            mPagerIndicatorGroup.setPagerIndicatorTrack(track);
+            mPagerIndicatorGroup.setIndicatorTrack(track);
 
             if (track != null)
             {

@@ -9,20 +9,20 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.sd.lib.indicator.model.PositionData;
-import com.sd.lib.indicator.track.PagerIndicatorTrack;
+import com.sd.lib.indicator.track.IndicatorTrack;
 
 /**
  * 线形的Item追踪view（开发中，未完成）
  */
-public class LinePagerIndicatorTrack extends View implements PagerIndicatorTrack
+public class LineIndicatorTrack extends View implements IndicatorTrack
 {
-    public LinePagerIndicatorTrack(Context context)
+    public LineIndicatorTrack(Context context)
     {
         super(context);
         init();
     }
 
-    public LinePagerIndicatorTrack(Context context, AttributeSet attrs)
+    public LineIndicatorTrack(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init();

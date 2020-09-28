@@ -1,48 +1,26 @@
 package com.sd.lib.indicator.adapter;
 
-import android.database.DataSetObservable;
-import android.database.DataSetObserver;
-import android.view.View;
 import android.view.ViewGroup;
 
+import com.sd.lib.indicator.item.IndicatorItem;
 import com.sd.lib.indicator.item.PagerIndicatorItem;
 
-public abstract class PagerIndicatorAdapter
+/**
+ * 用{@link IndicatorAdapter}替代
+ */
+@Deprecated
+public abstract class PagerIndicatorAdapter extends IndicatorAdapter
 {
-    private final DataSetObservable mDataSetObservable = new DataSetObservable();
-
-    public final void registerDataSetObserver(DataSetObserver observer)
+    @Override
+    protected final IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)
     {
-        mDataSetObservable.registerObserver(observer);
+        return onCreatePagerIndicatorItem(position, viewParent);
     }
 
-    public final void unregisterDataSetObserver(DataSetObserver observer)
+    @Override
+    public int getCount()
     {
-        mDataSetObservable.unregisterObserver(observer);
-    }
-
-    public final void notifyDataSetChanged()
-    {
-        mDataSetObservable.notifyChanged();
-    }
-
-    /**
-     * 创建Item
-     *
-     * @param position
-     * @param viewParent
-     * @return
-     */
-    public final View createPagerIndicatorItem(int position, ViewGroup viewParent)
-    {
-        final PagerIndicatorItem item = onCreatePagerIndicatorItem(position, viewParent);
-        if (item instanceof View)
-        {
-            return (View) item;
-        } else
-        {
-            throw new IllegalArgumentException("onCreatePagerIndicatorItem method must return instance of View");
-        }
+        return 0;
     }
 
     /**
