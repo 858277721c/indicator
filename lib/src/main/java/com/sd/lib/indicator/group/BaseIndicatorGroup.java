@@ -85,9 +85,11 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
         if (oldAdapter != adapter)
         {
             mAdapter = adapter;
-            if (mEventPublisher != null) ;
+
+            final IndicatorEventPublisher publisher = mEventPublisher;
+            if (publisher != null)
             {
-                final int count = mEventPublisher.getDataCount();
+                final int count = publisher.getDataCount();
                 onDataSetChanged(count);
             }
         }

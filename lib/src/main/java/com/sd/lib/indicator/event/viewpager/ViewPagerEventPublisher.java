@@ -9,25 +9,31 @@ import com.sd.lib.viewpager.helper.FPagerPercentChangeListener;
 import com.sd.lib.viewpager.helper.FPagerSelectedChangeListener;
 import com.sd.lib.viewpager.helper.FViewPagerHolder;
 
+import java.lang.ref.WeakReference;
+
 /**
  * ViewPager事件发布者
  */
 public class ViewPagerEventPublisher implements IndicatorEventPublisher
 {
+    private final WeakReference<ViewPager> mViewPager;
     private EventListener mEventListener;
 
     public ViewPagerEventPublisher(ViewPager viewPager)
     {
         if (viewPager == null)
             throw new NullPointerException("viewPager is null");
-
-        mViewPagerHolder.setViewPager(viewPager);
+        mViewPager = new WeakReference<>(viewPager);
     }
 
     @Override
     public void setEventListener(EventListener listener)
     {
+        if (listener == null)
+            throw new NullPointerException("listener is null");
+
         mEventListener = listener;
+        mViewPagerHolder.setViewPager(mViewPager.get());
     }
 
     @Override
