@@ -17,7 +17,7 @@ import com.sd.lib.indicator.view.PagerIndicator;
 public class IndicatorActivity extends AppCompatActivity
 {
     private ViewPager vpg_content;
-    private PagerIndicator view_indicator;
+    private PagerIndicator view_indicator_default, view_indicator_underline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,10 +25,13 @@ public class IndicatorActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indicator);
         vpg_content = findViewById(R.id.vpg_content);
-        view_indicator = findViewById(R.id.view_indicator);
+        view_indicator_default = findViewById(R.id.view_indicator_default);
+        view_indicator_underline = findViewById(R.id.view_indicator_underline);
 
-        view_indicator.setViewPager(vpg_content);
-        view_indicator.setAdapter(new IndicatorAdapter()
+        view_indicator_default.setViewPager(vpg_content);
+        view_indicator_underline.setViewPager(vpg_content);
+
+        view_indicator_underline.setAdapter(new IndicatorAdapter()
         {
             @Override
             protected IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)

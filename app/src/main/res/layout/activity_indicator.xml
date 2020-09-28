@@ -9,11 +9,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.sd.lib.indicator.view.PagerIndicator
-        android:id="@+id/view_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <com.sd.lib.indicator.view.PagerIndicator
+            android:id="@+id/view_indicator_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.sd.lib.indicator.view.PagerIndicator
+            android:id="@+id/view_indicator_underline"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
 
 </FrameLayout>
