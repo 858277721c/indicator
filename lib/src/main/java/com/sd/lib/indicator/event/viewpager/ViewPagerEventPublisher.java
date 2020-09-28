@@ -1,0 +1,106 @@
+package com.sd.lib.indicator.event.viewpager;
+
+import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.sd.lib.indicator.event.IndicatorEventPublisher;
+import com.sd.lib.viewpager.helper.FPagerPercentChangeListener;
+import com.sd.lib.viewpager.helper.FPagerSelectedChangeListener;
+import com.sd.lib.viewpager.helper.FViewPagerHolder;
+
+/**
+ * ViewPager事件发布者
+ */
+public class ViewPagerEventPublisher implements IndicatorEventPublisher
+{
+    private EventListener mEventListener;
+
+    public ViewPagerEventPublisher(ViewPager viewPager)
+    {
+        if (viewPager == null)
+            throw new NullPointerException("viewPager is null");
+
+        mViewPagerHolder.setViewPager(viewPager);
+    }
+
+    @Override
+    public void setEventListener(EventListener listener)
+    {
+        mEventListener = listener;
+    }
+
+    @Override
+    public void initItemView(View view, final int position)
+    {
+        if (!view.hasOnClickListeners())
+        {
+            view.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    final ViewPager viewPager = getViewPager();
+                    if (viewPager != null)
+                        viewPager.setCurrentItem(position);
+                }
+            });
+        }
+    }
+
+    public ViewPager getViewPager()
+    {
+        return mViewPagerHolder.getViewPager();
+    }
+
+    /**
+     * 保存ViewPager
+     */
+    private final FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
+    {
+        @Override
+        protected void onViewPagerChanged(ViewPager oldPager, ViewPager newPager)
+        {
+            mPagerSelectedChangeListener.setViewPager(newPager);
+            mPagerPercentChangeListener.setViewPager(newPager);
+        }
+    };
+
+    /**
+     * 页面数量变化和选中监听
+     */
+    private final FPagerSelectedChangeListener mPagerSelectedChangeListener = new FPagerSelectedChangeListener()
+    {
+        @Override
+        protected void onDataSetChanged()
+        {
+            mEventListener.onDataSetChanged(getAdapterCount());
+            super.onDataSetChanged();
+        }
+
+        @Override
+        protected void onSelectedChanged(int index, boolean selected)
+        {
+            mEventListener.onSelectChanged(index, selected);
+        }
+    };
+
+    /**
+     * 滚动百分比监听
+     */
+    private final FPagerPercentChangeListener mPagerPercentChangeListener = new FPagerPercentChangeListener()
+    {
+        @Override
+        public void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft)
+        {
+            mEventListener.onShowPercent(position, showPercent, isEnter, isMoveLeft);
+        }
+    };
+
+    @Override
+    public void destroy()
+    {
+        mViewPagerHolder.setViewPager(null);
+        mEventListener = null;
+    }
+}

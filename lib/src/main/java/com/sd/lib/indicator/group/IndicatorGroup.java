@@ -1,6 +1,7 @@
 package com.sd.lib.indicator.group;
 
 import com.sd.lib.indicator.adapter.IndicatorAdapter;
+import com.sd.lib.indicator.event.IndicatorEventPublisher;
 import com.sd.lib.indicator.item.IndicatorItem;
 import com.sd.lib.indicator.track.IndicatorTrack;
 
@@ -9,6 +10,27 @@ import com.sd.lib.indicator.track.IndicatorTrack;
  */
 public interface IndicatorGroup
 {
+    /**
+     * 设置事件发布者
+     *
+     * @param publisher
+     */
+    void setEventPublisher(IndicatorEventPublisher publisher);
+
+    /**
+     * 返回设置的事件发布者
+     *
+     * @return
+     */
+    IndicatorEventPublisher getEventPublisher();
+
+    /**
+     * 设置选中状态回调
+     *
+     * @param callback
+     */
+    void setSelectChangeCallback(SelectChangeCallback callback);
+
     /**
      * 设置适配器
      *
@@ -45,28 +67,14 @@ public interface IndicatorGroup
      */
     IndicatorItem getIndicatorItem(int position);
 
-    /**
-     * 数据集变化回调
-     *
-     * @param count
-     */
-    void onDataSetChanged(int count);
-
-    /**
-     * 页面显示的百分比回调
-     *
-     * @param position    第几页
-     * @param showPercent 显示的百分比[0-1]
-     * @param isEnter     true-当前页面处于进入状态，false-当前页面处于离开状态
-     * @param isMoveLeft  true-内容向左移动，false-内容向右移动
-     */
-    void onShowPercent(int position, float showPercent, boolean isEnter, boolean isMoveLeft);
-
-    /**
-     * 某一页选中或者非选中回调
-     *
-     * @param position 第几页
-     * @param selected true-选中，false-未选中
-     */
-    void onSelectChanged(int position, boolean selected);
+    interface SelectChangeCallback
+    {
+        /**
+         * 选中或者非选中回调
+         *
+         * @param position 位置
+         * @param selected true-选中，false-未选中
+         */
+        void onSelectChanged(int position, boolean selected);
+    }
 }

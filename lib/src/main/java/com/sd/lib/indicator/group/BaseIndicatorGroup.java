@@ -6,13 +6,14 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.sd.lib.indicator.adapter.IndicatorAdapter;
+import com.sd.lib.indicator.event.IndicatorEventPublisher;
 import com.sd.lib.indicator.item.IndicatorItem;
 import com.sd.lib.indicator.track.IndicatorTrack;
 
 /**
  * 指示器Group
  */
-public abstract class BaseIndicatorGroup extends LinearLayout implements IndicatorGroup
+public abstract class BaseIndicatorGroup extends LinearLayout implements IndicatorGroup, IndicatorEventPublisher.EventListener
 {
     public BaseIndicatorGroup(Context context)
     {
@@ -29,8 +30,36 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
         super(context, attrs, defStyleAttr);
     }
 
+    private IndicatorEventPublisher mEventPublisher;
     private IndicatorAdapter mAdapter;
     private IndicatorTrack mIndicatorTrack;
+
+    private SelectChangeCallback mSelectChangeCallback;
+
+    @Override
+    public void setEventPublisher(IndicatorEventPublisher publisher)
+    {
+        final IndicatorEventPublisher oldPublisher = mEventPublisher;
+        if (oldPublisher != publisher)
+        {
+            if (oldPublisher != null)
+                oldPublisher.destroy();
+
+            mEventPublisher = publisher;
+        }
+    }
+
+    @Override
+    public IndicatorEventPublisher getEventPublisher()
+    {
+        return mEventPublisher;
+    }
+
+    @Override
+    public void setSelectChangeCallback(SelectChangeCallback callback)
+    {
+        mSelectChangeCallback = callback;
+    }
 
     @Override
     public void setAdapter(IndicatorAdapter adapter)
@@ -123,5 +152,8 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
             if (track != null)
                 track.onSelectChanged(position, selected, item.getPositionData());
         }
+
+        if (mSelectChangeCallback != null)
+            mSelectChangeCallback.onSelectChanged(position, selected);
     }
 }
