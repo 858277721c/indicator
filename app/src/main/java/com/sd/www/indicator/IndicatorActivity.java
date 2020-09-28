@@ -40,7 +40,7 @@ public class IndicatorActivity extends AppCompatActivity
         });
 
         vpg_content.setAdapter(mPagerAdapter);
-        mPagerAdapter.getDataHolder().setData(DataModel.get(20));
+        mPagerAdapter.getDataHolder().setData(DataModel.get(1));
     }
 
     private final FPagerAdapter<DataModel> mPagerAdapter = new FPagerAdapter<DataModel>()

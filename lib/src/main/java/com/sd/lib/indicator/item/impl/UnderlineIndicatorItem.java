@@ -1,6 +1,7 @@
 package com.sd.lib.indicator.item.impl;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,11 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
         LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_underline_item, this, true);
         tv_name = findViewById(R.id.tv_name);
         view_underline = findViewById(R.id.view_underline);
+
+        final int padding = (int) (getContext().getResources().getDisplayMetrics().density * 10);
+        setPadding(padding, 0, padding, 0);
+
+        setBackgroundColor(Color.RED);
     }
 
     public TextView getTextViewName()
