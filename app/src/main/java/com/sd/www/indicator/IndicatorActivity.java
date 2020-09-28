@@ -35,12 +35,13 @@ public class IndicatorActivity extends AppCompatActivity
             {
                 final UnderlineIndicatorItem item = new UnderlineIndicatorItem(IndicatorActivity.this);
                 item.getTextViewName().setText(String.valueOf(position));
+                item.setMinimumWidth(100);
                 return item;
             }
         });
 
         vpg_content.setAdapter(mPagerAdapter);
-        mPagerAdapter.getDataHolder().setData(DataModel.get(1));
+        mPagerAdapter.getDataHolder().setData(DataModel.get(20));
     }
 
     private final FPagerAdapter<DataModel> mPagerAdapter = new FPagerAdapter<DataModel>()

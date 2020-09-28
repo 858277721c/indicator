@@ -32,6 +32,7 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
         init();
     }
 
+    private View view_root;
     private TextView tv_name;
     private View view_underline;
 
@@ -40,13 +41,12 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
     private void init()
     {
         LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_underline_item, this, true);
+        view_root = findViewById(R.id.view_root);
         tv_name = findViewById(R.id.tv_name);
         view_underline = findViewById(R.id.view_underline);
 
         final int padding = (int) (getContext().getResources().getDisplayMetrics().density * 10);
         setPadding(padding, 0, padding, 0);
-
-        setBackgroundColor(Color.RED);
     }
 
     public TextView getTextViewName()
@@ -57,6 +57,13 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
     public View getViewUnderline()
     {
         return view_underline;
+    }
+
+    @Override
+    public void setMinimumWidth(int minWidth)
+    {
+        super.setMinimumWidth(minWidth);
+        view_root.setMinimumWidth(minWidth);
     }
 
     @Override

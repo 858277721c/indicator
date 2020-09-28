@@ -6,7 +6,7 @@ group = 'com.github.zj565061763'
 android {
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 20200409
         versionName "1.1.3"
