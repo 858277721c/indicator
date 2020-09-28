@@ -55,6 +55,55 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
         });
     }
 
+    @Override
+    public void setViewPager(ViewPager viewPager)
+    {
+        mViewPagerHolder.setViewPager(viewPager);
+    }
+
+    @Override
+    public ViewPager getViewPager()
+    {
+        return mViewPagerHolder.getViewPager();
+    }
+
+    @Override
+    public void setAdapter(PagerIndicatorAdapter adapter)
+    {
+        final PagerIndicatorAdapter oldAdapter = mAdapter;
+        if (oldAdapter != adapter)
+        {
+            if (oldAdapter != null)
+                oldAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
+
+            mAdapter = adapter;
+
+            if (adapter != null)
+                adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
+        }
+    }
+
+    @Override
+    public PagerIndicatorAdapter getAdapter()
+    {
+        return mAdapter;
+    }
+
+    @Override
+    public void setPagerIndicatorTrack(PagerIndicatorTrack pagerIndicatorTrack)
+    {
+        mPagerIndicatorTrack = pagerIndicatorTrack;
+    }
+
+    @Override
+    public PagerIndicatorTrack getPagerIndicatorTrack()
+    {
+        return mPagerIndicatorTrack;
+    }
+
+    /**
+     * 保存ViewPager
+     */
     private final FViewPagerHolder mViewPagerHolder = new FViewPagerHolder()
     {
         @Override
@@ -95,48 +144,6 @@ public abstract class BasePagerIndicatorGroup extends LinearLayout implements Pa
             BasePagerIndicatorGroup.this.onShowPercent(position, showPercent, isEnter, isMoveLeft);
         }
     };
-
-    @Override
-    public void setViewPager(ViewPager viewPager)
-    {
-        mViewPagerHolder.setViewPager(viewPager);
-    }
-
-    @Override
-    public ViewPager getViewPager()
-    {
-        return mViewPagerHolder.getViewPager();
-    }
-
-    @Override
-    public void setAdapter(PagerIndicatorAdapter adapter)
-    {
-        if (mAdapter != null)
-            mAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
-
-        mAdapter = adapter;
-
-        if (adapter != null)
-            adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
-    }
-
-    @Override
-    public PagerIndicatorAdapter getAdapter()
-    {
-        return mAdapter;
-    }
-
-    @Override
-    public void setPagerIndicatorTrack(PagerIndicatorTrack pagerIndicatorTrack)
-    {
-        mPagerIndicatorTrack = pagerIndicatorTrack;
-    }
-
-    @Override
-    public PagerIndicatorTrack getPagerIndicatorTrack()
-    {
-        return mPagerIndicatorTrack;
-    }
 
     @Override
     public void onDataSetChanged(int count)
