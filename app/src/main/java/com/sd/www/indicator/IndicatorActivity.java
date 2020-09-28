@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.sd.lib.adapter.FPagerAdapter;
 import com.sd.lib.indicator.adapter.IndicatorAdapter;
 import com.sd.lib.indicator.item.IndicatorItem;
-import com.sd.lib.indicator.item.impl.ImageIndicatorItem;
+import com.sd.lib.indicator.item.impl.UnderlineIndicatorItem;
 import com.sd.lib.indicator.view.PagerIndicator;
 
 public class IndicatorActivity extends AppCompatActivity
@@ -28,9 +28,19 @@ public class IndicatorActivity extends AppCompatActivity
         view_indicator = findViewById(R.id.view_indicator);
 
         view_indicator.setViewPager(vpg_content);
+        view_indicator.setAdapter(new IndicatorAdapter()
+        {
+            @Override
+            protected IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)
+            {
+                final UnderlineIndicatorItem item = new UnderlineIndicatorItem(IndicatorActivity.this);
+                item.getTextViewName().setText(String.valueOf(position));
+                return item;
+            }
+        });
 
         vpg_content.setAdapter(mPagerAdapter);
-        mPagerAdapter.getDataHolder().setData(DataModel.get(10));
+        mPagerAdapter.getDataHolder().setData(DataModel.get(20));
     }
 
     private final FPagerAdapter<DataModel> mPagerAdapter = new FPagerAdapter<DataModel>()
