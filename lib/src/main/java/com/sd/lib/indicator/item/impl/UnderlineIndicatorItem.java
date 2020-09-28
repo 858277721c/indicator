@@ -1,7 +1,6 @@
 package com.sd.lib.indicator.item.impl;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +69,15 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
     public void onSelectChanged(boolean selected)
     {
         setSelected(selected);
+        if (selected)
+        {
+            view_underline.setVisibility(VISIBLE);
+            tv_name.setTextColor(getResources().getColor(R.color.lib_indicator_indicator_underline_text_selected));
+        } else
+        {
+            view_underline.setVisibility(INVISIBLE);
+            tv_name.setTextColor(getResources().getColor(R.color.lib_indicator_indicator_underline_text_normal));
+        }
     }
 
     @Override

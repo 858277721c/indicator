@@ -6,4 +6,9 @@
     <!-- 默认指示器选中颜色 -->
     <color name="lib_indicator_indicator_selected">#FB6F08</color>
 
+    <!-- 默认下划线指示器文字正常颜色 -->
+    <color name="lib_indicator_indicator_underline_text_normal">#333333</color>
+    <!-- 默认下划线指示器文字选中颜色 -->
+    <color name="lib_indicator_indicator_underline_text_selected">#FB6F08</color>
+
 </resources>
