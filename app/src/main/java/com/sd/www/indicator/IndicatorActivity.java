@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.adapter.FPagerAdapter;
+import com.sd.lib.indicator.adapter.IndicatorAdapter;
+import com.sd.lib.indicator.item.IndicatorItem;
+import com.sd.lib.indicator.item.impl.ImageIndicatorItem;
 import com.sd.lib.indicator.view.PagerIndicator;
 
 public class IndicatorActivity extends AppCompatActivity
@@ -30,16 +33,15 @@ public class IndicatorActivity extends AppCompatActivity
         mPagerAdapter.getDataHolder().setData(DataModel.get(10));
     }
 
-    private FPagerAdapter<DataModel> mPagerAdapter = new FPagerAdapter<DataModel>(this)
+    private final FPagerAdapter<DataModel> mPagerAdapter = new FPagerAdapter<DataModel>()
     {
         @Override
         public View getView(ViewGroup viewGroup, final int position)
         {
             final DataModel model = getDataHolder().get(position);
 
-            View view = getLayoutInflater().inflate(R.layout.item_vpg, viewGroup, false);
-
-            TextView textView = view.findViewById(R.id.btn);
+            final View view = getLayoutInflater().inflate(R.layout.item_view_pager, viewGroup, false);
+            final TextView textView = view.findViewById(R.id.btn);
             textView.setText(model.name);
             textView.setOnClickListener(new View.OnClickListener()
             {

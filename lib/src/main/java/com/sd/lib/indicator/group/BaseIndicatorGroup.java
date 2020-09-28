@@ -1,13 +1,14 @@
 package com.sd.lib.indicator.group;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sd.lib.indicator.adapter.IndicatorAdapter;
 import com.sd.lib.indicator.event.IndicatorEventPublisher;
 import com.sd.lib.indicator.item.IndicatorItem;
+import com.sd.lib.indicator.item.impl.ImageIndicatorItem;
 import com.sd.lib.indicator.track.IndicatorTrack;
 
 /**
@@ -18,16 +19,19 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
     public BaseIndicatorGroup(Context context)
     {
         super(context);
+        init();
     }
 
     public BaseIndicatorGroup(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+        init();
     }
 
     public BaseIndicatorGroup(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     private IndicatorEventPublisher mEventPublisher;
@@ -35,6 +39,19 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
     private IndicatorTrack mIndicatorTrack;
 
     private SelectChangeCallback mSelectChangeCallback;
+
+    private void init()
+    {
+        // 设置默认适配器
+        setAdapter(new IndicatorAdapter()
+        {
+            @Override
+            protected IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)
+            {
+                return new ImageIndicatorItem(getContext());
+            }
+        });
+    }
 
     @Override
     public void setEventPublisher(IndicatorEventPublisher publisher)
@@ -67,38 +84,14 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
         final IndicatorAdapter oldAdapter = mAdapter;
         if (oldAdapter != adapter)
         {
-            if (oldAdapter != null)
-                oldAdapter.unregisterDataSetObserver(mIndicatorAdapterDataSetObserver);
-
             mAdapter = adapter;
-
-            if (adapter != null)
-                adapter.registerDataSetObserver(mIndicatorAdapterDataSetObserver);
-        }
-    }
-
-    /**
-     * 适配器数据监听
-     */
-    private final DataSetObserver mIndicatorAdapterDataSetObserver = new DataSetObserver()
-    {
-        @Override
-        public void onChanged()
-        {
-            super.onChanged();
-            if (mAdapter != null)
+            if (mEventPublisher != null) ;
             {
-                final int count = mAdapter.getCount();
-                BaseIndicatorGroup.this.onDataSetChanged(count);
+                final int count = mEventPublisher.getDataCount();
+                onDataSetChanged(count);
             }
         }
-
-        @Override
-        public void onInvalidated()
-        {
-            super.onInvalidated();
-        }
-    };
+    }
 
     @Override
     public IndicatorAdapter getAdapter()

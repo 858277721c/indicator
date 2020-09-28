@@ -23,6 +23,13 @@ public interface IndicatorEventPublisher
     void initItemView(View view, int position);
 
     /**
+     * 返回一共有多少数据
+     *
+     * @return
+     */
+    int getDataCount();
+
+    /**
      * 销毁
      */
     void destroy();

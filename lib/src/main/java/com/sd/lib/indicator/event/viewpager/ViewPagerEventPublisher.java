@@ -48,6 +48,12 @@ public class ViewPagerEventPublisher implements IndicatorEventPublisher
         }
     }
 
+    @Override
+    public int getDataCount()
+    {
+        return mViewPagerHolder.getAdapterCount();
+    }
+
     public ViewPager getViewPager()
     {
         return mViewPagerHolder.getViewPager();
