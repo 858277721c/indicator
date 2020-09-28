@@ -39,7 +39,7 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
 
     private void init()
     {
-        LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_underline_item, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.lib_indicator_underline_indicator_item, this, true);
         view_root = findViewById(R.id.view_root);
         tv_name = findViewById(R.id.tv_name);
         view_underline = findViewById(R.id.view_underline);

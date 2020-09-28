@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- 默认指示器正常颜色 -->
-    <color name="lib_indicator_indicator_normal">#777777</color>
-    <!-- 默认指示器选中颜色 -->
-    <color name="lib_indicator_indicator_selected">#FB6F08</color>
-
     <!-- 默认下划线指示器文字正常颜色 -->
     <color name="lib_indicator_indicator_underline_text_normal">#333333</color>
     <!-- 默认下划线指示器文字选中颜色 -->
