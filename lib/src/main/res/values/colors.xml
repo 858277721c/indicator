@@ -10,8 +10,10 @@
     <color name="lib_indicator_indicator_underline_text_normal">#333333</color>
     <!-- 默认下划线指示器文字选中颜色 -->
     <color name="lib_indicator_indicator_underline_text_selected">#FB6F08</color>
-    <!-- 默认下划线指示器下划线颜色 -->
-    <color name="lib_indicator_indicator_underline_bg_underline">
+    <!-- 默认下划线指示器下划线正常颜色 -->
+    <color name="lib_indicator_indicator_underline_bg_underline_normal">#00000000</color>
+    <!-- 默认下划线指示器下划线选中颜色 -->
+    <color name="lib_indicator_indicator_underline_bg_underline_selected">
         @color/lib_indicator_indicator_underline_text_selected
     </color>
 

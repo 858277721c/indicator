@@ -71,11 +71,11 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
         setSelected(selected);
         if (selected)
         {
-            view_underline.setVisibility(VISIBLE);
+            view_underline.setBackgroundResource(R.drawable.lib_indicator_indicator_underline_bg_underline_selected);
             tv_name.setTextColor(getResources().getColor(R.color.lib_indicator_indicator_underline_text_selected));
         } else
         {
-            view_underline.setVisibility(INVISIBLE);
+            view_underline.setBackgroundResource(R.drawable.lib_indicator_indicator_underline_bg_underline_normal);
             tv_name.setTextColor(getResources().getColor(R.color.lib_indicator_indicator_underline_text_normal));
         }
     }

@@ -3,7 +3,7 @@
     android:shape="rectangle"
     android:useLevel="false">
 
-    <solid android:color="@color/lib_indicator_indicator_underline_bg_underline" />
+    <solid android:color="@color/lib_indicator_indicator_underline_bg_underline_selected" />
 
     <corners android:radius="2dp" />
 

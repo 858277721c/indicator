@@ -20,7 +20,6 @@
         android:layout_height="2dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/lib_indicator_indicator_underline_bg_underline"
-        android:visibility="gone" />
+        android:background="@drawable/lib_indicator_indicator_underline_bg_underline_normal" />
 
 </RelativeLayout>
