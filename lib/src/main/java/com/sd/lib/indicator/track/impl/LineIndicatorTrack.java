@@ -14,7 +14,7 @@ import com.sd.lib.indicator.track.IndicatorTrack;
 /**
  * 线形的Item追踪view（开发中，未完成）
  */
-public class LineIndicatorTrack extends View implements IndicatorTrack
+class LineIndicatorTrack extends View implements IndicatorTrack
 {
     public LineIndicatorTrack(Context context)
     {
