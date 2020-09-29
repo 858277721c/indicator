@@ -1,6 +1,7 @@
 package com.sd.lib.indicator.group;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +89,13 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
         final IndicatorAdapter oldAdapter = mAdapter;
         if (oldAdapter != adapter)
         {
+            if (oldAdapter != null)
+                oldAdapter.unregisterDataSetObserver(mAdapterDataSetObserver);
+
             mAdapter = adapter;
+
+            if (adapter != null)
+                adapter.registerDataSetObserver(mAdapterDataSetObserver);
 
             final IndicatorEventPublisher publisher = mEventPublisher;
             if (publisher != null)
@@ -155,6 +162,24 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
         if (mSelectChangeCallback != null)
             mSelectChangeCallback.onSelectChanged(position, selected);
     }
+
+    /**
+     * 适配器数据监听
+     */
+    private final DataSetObserver mAdapterDataSetObserver = new DataSetObserver()
+    {
+        @Override
+        public void onChanged()
+        {
+            super.onChanged();
+            final IndicatorEventPublisher publisher = mEventPublisher;
+            if (publisher != null)
+            {
+                final int count = publisher.getDataCount();
+                BaseIndicatorGroup.this.onDataSetChanged(count);
+            }
+        }
+    };
 
     protected void initIndicatorItemView(View view, int position)
     {

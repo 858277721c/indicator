@@ -31,17 +31,8 @@ public class IndicatorActivity extends AppCompatActivity
         view_indicator_default.setViewPager(vpg_content);
         view_indicator_underline.setViewPager(vpg_content);
 
-        view_indicator_underline.setAdapter(new IndicatorAdapter()
-        {
-            @Override
-            protected IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)
-            {
-                final UnderlineIndicatorItem item = new UnderlineIndicatorItem(IndicatorActivity.this);
-                item.getTextViewName().setText(String.valueOf(position));
-                item.setMinimumWidth(100);
-                return item;
-            }
-        });
+        // 设置指示器适配器
+        view_indicator_underline.setAdapter(mUnderlineIndicatorAdapter);
 
         vpg_content.setAdapter(mPagerAdapter);
         mPagerAdapter.getDataHolder().setData(DataModel.get(20));
@@ -67,6 +58,18 @@ public class IndicatorActivity extends AppCompatActivity
             });
 
             return view;
+        }
+    };
+
+    private final IndicatorAdapter mUnderlineIndicatorAdapter = new IndicatorAdapter()
+    {
+        @Override
+        protected IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)
+        {
+            final UnderlineIndicatorItem item = new UnderlineIndicatorItem(IndicatorActivity.this);
+            item.getTextViewName().setText(String.valueOf(position));
+            item.setMinimumWidth(100);
+            return item;
         }
     };
 }
