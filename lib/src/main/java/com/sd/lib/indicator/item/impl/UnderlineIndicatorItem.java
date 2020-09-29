@@ -68,7 +68,6 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
     @Override
     public void onSelectChanged(boolean selected)
     {
-        setSelected(selected);
         if (selected)
         {
             view_underline.setBackgroundResource(R.drawable.lib_indicator_indicator_underline_bg_underline_selected);
@@ -78,6 +77,8 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
             view_underline.setBackgroundResource(R.drawable.lib_indicator_indicator_underline_bg_underline_normal);
             tv_name.setTextColor(getResources().getColor(R.color.lib_indicator_indicator_underline_text_normal));
         }
+
+        setSelected(selected);
     }
 
     @Override
