@@ -2,6 +2,7 @@ package com.sd.lib.indicator.group;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -153,5 +154,12 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
 
         if (mSelectChangeCallback != null)
             mSelectChangeCallback.onSelectChanged(position, selected);
+    }
+
+    protected void initIndicatorItemView(View view, int position)
+    {
+        final IndicatorEventPublisher publisher = mEventPublisher;
+        if (publisher != null)
+            publisher.initItemView(view, position);
     }
 }

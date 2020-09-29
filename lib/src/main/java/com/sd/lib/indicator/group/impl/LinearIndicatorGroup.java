@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sd.lib.indicator.adapter.IndicatorAdapter;
-import com.sd.lib.indicator.event.IndicatorEventPublisher;
 import com.sd.lib.indicator.group.BaseIndicatorGroup;
 import com.sd.lib.indicator.item.IndicatorItem;
 
@@ -68,8 +67,6 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
         if (adapter == null)
             return;
 
-        final IndicatorEventPublisher publisher = getEventPublisher();
-
         for (int i = 0; i < count; i++)
         {
             final View view = adapter.createIndicatorItem(i, this);
@@ -90,9 +87,7 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
             }
 
             addView(view, params);
-
-            if (publisher != null)
-                publisher.initItemView(view, i);
+            initIndicatorItemView(view, i);
         }
     }
 

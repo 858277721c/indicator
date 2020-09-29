@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.sd.lib.indicator.event.IndicatorEventPublisher;
 import com.sd.lib.indicator.group.BaseIndicatorGroup;
 import com.sd.lib.indicator.item.IndicatorItem;
 
@@ -40,12 +39,8 @@ public class FixLinearIndicatorGroup extends BaseIndicatorGroup
         super.onViewAdded(child);
         if (child instanceof IndicatorItem)
         {
-            final IndicatorEventPublisher publisher = getEventPublisher();
-            if (publisher != null)
-            {
-                final int index = indexOfChild(child);
-                publisher.initItemView(child, index);
-            }
+            final int index = indexOfChild(child);
+            initIndicatorItemView(child, index);
         } else
         {
             post(new Runnable()
