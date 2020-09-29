@@ -21,7 +21,7 @@ public abstract class IndicatorAdapter
         mDataSetObservable.unregisterObserver(observer);
     }
 
-    public final void notifyDataSetChanged()
+    public void notifyDataSetChanged()
     {
         mDataSetObservable.notifyChanged();
     }
