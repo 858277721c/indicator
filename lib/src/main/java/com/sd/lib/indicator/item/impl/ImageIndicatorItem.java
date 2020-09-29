@@ -115,9 +115,9 @@ public class ImageIndicatorItem extends FrameLayout implements IndicatorItem
         public int imageResIdSelected;
 
         public int widthNormal;
-        public int heightNormal;
-
         public int widthSelected;
+
+        public int heightNormal;
         public int heightSelected;
 
         public int margin;
@@ -128,9 +128,9 @@ public class ImageIndicatorItem extends FrameLayout implements IndicatorItem
             this.imageResIdSelected = R.drawable.lib_indicator_ic_indicator_selected;
 
             this.widthNormal = context.getResources().getDimensionPixelSize(R.dimen.lib_indicator_indicator_width_normal);
-            this.heightNormal = context.getResources().getDimensionPixelSize(R.dimen.lib_indicator_indicator_height_normal);
-
             this.widthSelected = context.getResources().getDimensionPixelSize(R.dimen.lib_indicator_indicator_width_selected);
+
+            this.heightNormal = context.getResources().getDimensionPixelSize(R.dimen.lib_indicator_indicator_height_normal);
             this.heightSelected = context.getResources().getDimensionPixelSize(R.dimen.lib_indicator_indicator_height_selected);
 
             this.margin = context.getResources().getDimensionPixelSize(R.dimen.lib_indicator_indicator_margin);
