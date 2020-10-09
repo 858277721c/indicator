@@ -2,9 +2,12 @@ package com.sd.lib.indicator.item.impl;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sd.lib.indicator.R;
@@ -58,6 +61,22 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
         return view_underline;
     }
 
+    /**
+     * 设置下划线在父容器底部
+     */
+    public void setUnderlineGravityBottom()
+    {
+        setLayoutGravity(view_underline, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+    }
+
+    /**
+     * 设置下划线在父容器顶部
+     */
+    public void setUnderlineGravityTop()
+    {
+        setLayoutGravity(view_underline, Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+    }
+
     @Override
     public void setMinimumWidth(int minWidth)
     {
@@ -104,5 +123,33 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
         getPositionData().top = getTop();
         getPositionData().right = getRight();
         getPositionData().bottom = getBottom();
+    }
+
+    private static void setLayoutGravity(View view, int gravity)
+    {
+        if (view == null)
+            return;
+
+        final ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p == null)
+            return;
+
+        if (p instanceof FrameLayout.LayoutParams)
+        {
+            final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) p;
+            if (params.gravity != gravity)
+            {
+                params.gravity = gravity;
+                view.setLayoutParams(params);
+            }
+        } else if (p instanceof LinearLayout.LayoutParams)
+        {
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) p;
+            if (params.gravity != gravity)
+            {
+                params.gravity = gravity;
+                view.setLayoutParams(params);
+            }
+        }
     }
 }
