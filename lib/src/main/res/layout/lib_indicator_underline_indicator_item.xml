@@ -14,12 +14,20 @@
         android:textColor="@color/lib_indicator_indicator_underline_text_normal"
         android:textSize="15sp" />
 
-    <View
-        android:id="@+id/view_underline"
-        android:layout_width="20dp"
-        android:layout_height="2dp"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/lib_indicator_indicator_underline_bg_underline_normal" />
+        android:layout_centerHorizontal="true">
+
+        <View
+            android:id="@+id/view_underline"
+            android:layout_width="20dp"
+            android:layout_height="2dp"
+            android:layout_gravity="top|center_horizontal"
+            android:background="@drawable/lib_indicator_indicator_underline_bg_underline_normal" />
+
+    </FrameLayout>
 
 </RelativeLayout>
