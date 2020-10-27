@@ -3,7 +3,6 @@ package com.sd.lib.indicator.group;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -180,11 +179,4 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
             }
         }
     };
-
-    protected void initIndicatorItemView(View view, int position)
-    {
-        final IndicatorEventPublisher publisher = mEventPublisher;
-        if (publisher != null)
-            publisher.initItemView(view, position);
-    }
 }

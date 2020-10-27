@@ -1,7 +1,5 @@
 package com.sd.lib.indicator.event;
 
-import android.view.View;
-
 /**
  * 指示器事件发布者
  */
@@ -15,12 +13,11 @@ public interface IndicatorEventPublisher
     void setEventListener(EventListener listener);
 
     /**
-     * 初始化Item
+     * 设置选中位置
      *
-     * @param view
      * @param position
      */
-    void initItemView(View view, int position);
+    void setSelected(int position);
 
     /**
      * 返回一共有多少数据

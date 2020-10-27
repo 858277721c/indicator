@@ -1,7 +1,5 @@
 package com.sd.lib.indicator.event.viewpager;
 
-import android.view.View;
-
 import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.indicator.event.IndicatorEventPublisher;
@@ -37,21 +35,11 @@ public class ViewPagerEventPublisher implements IndicatorEventPublisher
     }
 
     @Override
-    public void initItemView(View view, final int position)
+    public void setSelected(int position)
     {
-        if (!view.hasOnClickListeners())
-        {
-            view.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    final ViewPager viewPager = getViewPager();
-                    if (viewPager != null)
-                        viewPager.setCurrentItem(position);
-                }
-            });
-        }
+        final ViewPager viewPager = getViewPager();
+        if (viewPager != null)
+            viewPager.setCurrentItem(position);
     }
 
     @Override
