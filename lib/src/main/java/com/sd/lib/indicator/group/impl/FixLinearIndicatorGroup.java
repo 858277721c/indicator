@@ -65,20 +65,9 @@ public class FixLinearIndicatorGroup extends BaseIndicatorGroup
         super.onViewAdded(child);
         if (child instanceof IndicatorItem)
         {
-            final int index = indexOfChild(child);
             final IndicatorItem item = (IndicatorItem) child;
-            mListItem.add(index, item);
+            mListItem.add(item);
             registerClickListenerIfNeed(child);
-        } else
-        {
-            post(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    throw new RuntimeException("child must be instance of " + IndicatorItem.class.getName());
-                }
-            });
         }
     }
 
