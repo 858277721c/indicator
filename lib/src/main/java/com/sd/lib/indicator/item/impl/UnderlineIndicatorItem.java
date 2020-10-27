@@ -39,6 +39,7 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
     private View view_underline;
 
     private PositionData mPositionData;
+    private Callback mCallback;
 
     private void init()
     {
@@ -49,6 +50,11 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
 
         final int padding = (int) (getContext().getResources().getDisplayMetrics().density * 10);
         setPadding(padding, 0, padding, 0);
+    }
+
+    public void setCallback(Callback callback)
+    {
+        mCallback = callback;
     }
 
     public TextView getTextViewName()
@@ -98,17 +104,28 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
         }
 
         setSelected(selected);
+
+        if (mCallback != null)
+            mCallback.onSelectChanged(selected);
     }
 
     @Override
     public void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft)
     {
-
+        if (mCallback != null)
+            mCallback.onShowPercent(showPercent, isEnter, isMoveLeft);
     }
 
     @Override
     public PositionData getPositionData()
     {
+        if (mCallback != null)
+        {
+            final PositionData data = mCallback.getPositionData();
+            if (data != null)
+                return data;
+        }
+
         if (mPositionData == null)
             mPositionData = new PositionData();
         return mPositionData;
@@ -150,6 +167,21 @@ public class UnderlineIndicatorItem extends FrameLayout implements IndicatorItem
                 params.gravity = gravity;
                 view.setLayoutParams(params);
             }
+        }
+    }
+
+    public static abstract class Callback implements IndicatorItem
+    {
+        @Override
+        public void onShowPercent(float showPercent, boolean isEnter, boolean isMoveLeft)
+        {
+
+        }
+
+        @Override
+        public PositionData getPositionData()
+        {
+            return null;
         }
     }
 }
