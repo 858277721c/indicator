@@ -88,21 +88,28 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
             }
 
             addView(view, params);
-
-            if (!view.hasOnClickListeners())
-            {
-                view.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        final IndicatorEventPublisher publisher = getEventPublisher();
-                        if (publisher != null)
-                            publisher.setSelected(indexOfChild(view));
-                    }
-                });
-            }
+            registerClickListenerIfNeed(view);
         }
+    }
+
+    private void registerClickListenerIfNeed(final View view)
+    {
+        if (view.hasOnClickListeners())
+            return;
+
+        view.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                final IndicatorEventPublisher publisher = getEventPublisher();
+                if (publisher != null)
+                {
+                    final int index = indexOfChild(view);
+                    publisher.setSelected(index);
+                }
+            }
+        });
     }
 
     @Override
