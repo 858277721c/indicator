@@ -6,35 +6,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import com.sd.lib.adapter.FPagerAdapter;
 import com.sd.lib.indicator.adapter.IndicatorAdapter;
 import com.sd.lib.indicator.item.IndicatorItem;
+import com.sd.lib.indicator.item.impl.ImageIndicatorItem;
 import com.sd.lib.indicator.item.impl.UnderlineIndicatorItem;
-import com.sd.lib.indicator.view.PagerIndicator;
+import com.sd.www.indicator.databinding.ActivityIndicatorBinding;
 
 public class IndicatorActivity extends AppCompatActivity
 {
-    private ViewPager vpg_content;
-    private PagerIndicator view_indicator_default, view_indicator_underline;
+    private ActivityIndicatorBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_indicator);
-        vpg_content = findViewById(R.id.vpg_content);
-        view_indicator_default = findViewById(R.id.view_indicator_default);
-        view_indicator_underline = findViewById(R.id.view_indicator_underline);
+        mBinding = ActivityIndicatorBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
 
-        view_indicator_default.setViewPager(vpg_content);
-        view_indicator_underline.setViewPager(vpg_content);
+        // 为指示器绑定ViewPager
+        mBinding.viewIndicatorDefault.setViewPager(mBinding.vpgContent);
+        mBinding.viewIndicatorUnderline.setViewPager(mBinding.vpgContent);
 
-        // 设置指示器适配器
-        view_indicator_underline.setAdapter(mUnderlineIndicatorAdapter);
+        // 为指示器设置适配器
+        mBinding.viewIndicatorDefault.setAdapter(mDefaultIndicatorAdapter);
+        mBinding.viewIndicatorUnderline.setAdapter(mUnderlineIndicatorAdapter);
 
-        vpg_content.setAdapter(mPagerAdapter);
+        mBinding.vpgContent.setAdapter(mPagerAdapter);
         mPagerAdapter.getDataHolder().setData(DataModel.get(20));
     }
 
@@ -61,6 +60,21 @@ public class IndicatorActivity extends AppCompatActivity
         }
     };
 
+    /**
+     * 指示器适配器
+     */
+    private final IndicatorAdapter mDefaultIndicatorAdapter = new IndicatorAdapter()
+    {
+        @Override
+        protected IndicatorItem onCreateIndicatorItem(int position, ViewGroup viewParent)
+        {
+            return new ImageIndicatorItem(IndicatorActivity.this);
+        }
+    };
+
+    /**
+     * 指示器适配器
+     */
     private final IndicatorAdapter mUnderlineIndicatorAdapter = new IndicatorAdapter()
     {
         @Override
