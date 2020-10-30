@@ -124,6 +124,24 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
     }
 
     @Override
+    public void clearSelected()
+    {
+        final IndicatorEventPublisher publisher = getEventPublisher();
+        if (publisher == null)
+            return;
+
+        final int position = publisher.getSelectedPosition();
+        if (position < 0)
+            return;
+
+        final IndicatorItem indicatorItem = getIndicatorItem(position);
+        if (indicatorItem == null)
+            return;
+
+        indicatorItem.onSelectChanged(false);
+    }
+
+    @Override
     public void onDataSetChanged(int count)
     {
         final IndicatorTrack track = getIndicatorTrack();

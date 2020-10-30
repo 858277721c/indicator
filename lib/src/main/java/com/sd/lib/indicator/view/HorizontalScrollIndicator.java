@@ -108,4 +108,12 @@ public class HorizontalScrollIndicator extends FrameLayout
             }
         }
     }
+
+    /**
+     * 清空选中状态
+     */
+    public void clearSelected()
+    {
+        mIndicatorGroup.clearSelected();
+    }
 }

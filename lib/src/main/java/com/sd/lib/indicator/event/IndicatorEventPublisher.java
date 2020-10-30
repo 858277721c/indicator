@@ -20,6 +20,13 @@ public interface IndicatorEventPublisher
     void setSelected(int position);
 
     /**
+     * 返回选中的位置
+     *
+     * @return
+     */
+    int getSelectedPosition();
+
+    /**
      * 返回一共有多少数据
      *
      * @return

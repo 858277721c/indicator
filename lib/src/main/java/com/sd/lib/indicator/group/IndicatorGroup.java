@@ -67,6 +67,11 @@ public interface IndicatorGroup
      */
     IndicatorItem getIndicatorItem(int position);
 
+    /**
+     * 清空选中状态
+     */
+    void clearSelected();
+
     interface SelectChangeCallback
     {
         /**

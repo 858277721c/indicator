@@ -43,6 +43,15 @@ public class ViewPagerEventPublisher implements IndicatorEventPublisher
     }
 
     @Override
+    public int getSelectedPosition()
+    {
+        final ViewPager viewPager = getViewPager();
+        if (viewPager != null)
+            return viewPager.getCurrentItem();
+        return -1;
+    }
+
+    @Override
     public int getDataCount()
     {
         return mViewPagerHolder.getAdapterCount();
