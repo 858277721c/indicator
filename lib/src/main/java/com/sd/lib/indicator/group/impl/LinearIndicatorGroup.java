@@ -11,6 +11,9 @@ import com.sd.lib.indicator.event.IndicatorEventPublisher;
 import com.sd.lib.indicator.group.BaseIndicatorGroup;
 import com.sd.lib.indicator.item.IndicatorItem;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 /**
  * 线性的指示器Group
  */
@@ -34,6 +37,8 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
         init();
     }
 
+    private final Map<View, Integer> mMapView = new WeakHashMap<>();
+
     private void init()
     {
         setOrientation(HORIZONTAL);
@@ -43,7 +48,7 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
     @Override
     public IndicatorItem getIndicatorItem(int position)
     {
-        return (IndicatorItem) getChildAt(position);
+        return (IndicatorItem) getPositionView(position);
     }
 
     @Override
@@ -68,26 +73,31 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
         if (adapter == null)
             return;
 
+        mMapView.clear();
         for (int i = 0; i < count; i++)
         {
             final View view = adapter.createIndicatorItem(i, this);
-
-            ViewGroup.LayoutParams params = view.getLayoutParams();
-            if (params == null)
+            if (view.getParent() == null)
             {
-                if (getOrientation() == HORIZONTAL)
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                if (params == null)
                 {
-                    params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT);
-                } else
-                {
-                    params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
+                    if (getOrientation() == HORIZONTAL)
+                    {
+                        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT);
+                    } else
+                    {
+                        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT);
+                    }
+                    view.setLayoutParams(params);
                 }
-                view.setLayoutParams(params);
+
+                addView(view, params);
             }
 
-            addView(view, params);
+            mMapView.put(view, i);
             registerClickListenerIfNeed(view);
         }
     }
@@ -105,11 +115,29 @@ public class LinearIndicatorGroup extends BaseIndicatorGroup
                 final IndicatorEventPublisher publisher = getEventPublisher();
                 if (publisher != null)
                 {
-                    final int index = indexOfChild(view);
-                    publisher.setSelected(index);
+                    final int position = getViewPosition(view);
+                    publisher.setSelected(position);
                 }
             }
         });
+    }
+
+    private View getPositionView(int position)
+    {
+        if (mMapView.isEmpty())
+            return null;
+
+        for (Map.Entry<View, Integer> entry : mMapView.entrySet())
+        {
+            if (position == entry.getValue())
+                return entry.getKey();
+        }
+        return null;
+    }
+
+    private int getViewPosition(View view)
+    {
+        return mMapView.get(view);
     }
 
     @Override
