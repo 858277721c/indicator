@@ -3,7 +3,6 @@ package com.sd.www.indicator;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +12,7 @@ import com.sd.lib.indicator.item.IndicatorItem;
 import com.sd.lib.indicator.item.impl.ImageIndicatorItem;
 import com.sd.lib.indicator.item.impl.UnderlineIndicatorItem;
 import com.sd.www.indicator.databinding.ActivityIndicatorBinding;
+import com.sd.www.indicator.databinding.ItemViewPagerBinding;
 
 public class IndicatorActivity extends AppCompatActivity
 {
@@ -43,11 +43,10 @@ public class IndicatorActivity extends AppCompatActivity
         public View getView(ViewGroup viewGroup, final int position)
         {
             final DataModel model = getDataHolder().get(position);
+            final ItemViewPagerBinding binding = ItemViewPagerBinding.inflate(getLayoutInflater(), viewGroup, false);
 
-            final View view = getLayoutInflater().inflate(R.layout.item_view_pager, viewGroup, false);
-            final TextView textView = view.findViewById(R.id.btn);
-            textView.setText(model.name);
-            textView.setOnClickListener(new View.OnClickListener()
+            binding.btn.setText(model.name);
+            binding.btn.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
@@ -56,7 +55,7 @@ public class IndicatorActivity extends AppCompatActivity
                 }
             });
 
-            return view;
+            return binding.getRoot();
         }
     };
 
