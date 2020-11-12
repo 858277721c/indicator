@@ -31,6 +31,12 @@ public class PagerIndicator extends HorizontalScrollIndicator
      */
     public void setViewPager(ViewPager viewPager)
     {
-        setEventPublisher(new ViewPagerEventPublisher(viewPager));
+        if (viewPager == null)
+        {
+            setEventPublisher(null);
+        } else
+        {
+            setEventPublisher(new ViewPagerEventPublisher(viewPager));
+        }
     }
 }

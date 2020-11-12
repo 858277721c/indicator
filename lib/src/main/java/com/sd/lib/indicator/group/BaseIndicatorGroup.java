@@ -61,7 +61,10 @@ public abstract class BaseIndicatorGroup extends LinearLayout implements Indicat
         if (oldPublisher != publisher)
         {
             if (oldPublisher != null)
+            {
+                clearSelected();
                 oldPublisher.destroy();
+            }
 
             mEventPublisher = publisher;
 
